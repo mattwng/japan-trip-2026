@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Logistics &mdash; Kauai to Kii-Tanabe</title>
+  <style>
+
+    /* ── Reset ── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ── Base ── */
+    body {
+      font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px;
+      color: #222;
+      background: #eef2f7;
+      padding: 16px;
+    }
+
+    /* ── Page wrapper ── */
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* ── Document Header ── */
+    .doc-header {
+      background: #1a3a5c;
+      color: #fff;
+      border-radius: 10px 10px 0 0;
+      padding: 18px 22px 16px;
+      margin-bottom: 0;
+    }
+    .doc-header h1 {
+      font-size: 1.25em;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      margin-bottom: 5px;
+    }
+    .doc-header .meta {
+      font-size: 0.82em;
+      opacity: 0.82;
+      line-height: 1.5;
+    }
+
+    /* ── Day Divider ── */
+    .day-divider {
+      background: #2a5a8c;
+      color: #fff;
+      font-size: 0.78em;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 6px 22px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: #fff;
+      border-left: 4px solid #ccc;
+      padding: 14px 18px 12px;
+      border-bottom: 1px solid #e0e0e0;
+      position: relative;
+    }
+    .card:last-child {
+      border-radius: 0 0 10px 10px;
+      border-bottom: none;
+    }
+
+    /* Card type colors */
+    .card.flight   { border-left-color: #2a7abf; background: #f4f9ff; }
+    .card.transfer { border-left-color: #c8a800; background: #fffdf0; }
+    .card.hotel    { border-left-color: #2d7a3a; background: #f4fbf4; }
+
+    /* ── Card Header Row ── */
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .card-title {
+      font-size: 1.0em;
+      font-weight: 700;
+      color: #111;
+      flex: 1;
+      min-width: 0;
+    }
+    .card-title small {
+      display: block;
+      font-weight: 400;
+      font-size: 0.82em;
+      color: #555;
+      margin-top: 2px;
+    }
+
+    /* ── Badges ── */
+    .badge {
+      display: inline-block;
+      font-size: 0.68em;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .badge-flight   { background: #c5daf0; color: #1a4a7a; }
+    .badge-transfer { background: #f5edb8; color: #7a6a00; }
+    .badge-hotel    { background: #d0ead0; color: #1a5a1a; }
+
+    /* ── Route Line ── */
+    .route {
+      font-size: 1.05em;
+      font-weight: 700;
+      color: #1a3a5c;
+      margin-bottom: 10px;
+      letter-spacing: 0.3px;
+    }
+    .route .arrow { color: #888; margin: 0 4px; }
+
+    /* ── Details block ── */
+    .details {
+      font-size: 0.88em;
+      line-height: 1.6;
+      color: #333;
+    }
+    .details p { margin-bottom: 6px; }
+    .details p:last-child { margin-bottom: 0; }
+
+    /* Seat / passenger line */
+    .pax-row {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .pax {
+      background: #e8f0fa;
+      border-radius: 5px;
+      padding: 5px 10px;
+      font-size: 0.88em;
+      font-weight: 600;
+      color: #1a3a5c;
+    }
+    .pax span {
+      font-weight: 400;
+      color: #444;
+    }
+
+    /* Steps */
+    .steps {
+      margin: 8px 0 8px 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .steps li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 0.87em;
+      line-height: 1.5;
+    }
+    .step-num {
+      background: #2a5a8c;
+      color: #fff;
+      font-size: 0.7em;
+      font-weight: 700;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-body strong {
+      display: block;
+      color: #1a3a5c;
+      margin-bottom: 1px;
+    }
+
+    /* ATM callout */
+    .atm-callout {
+      background: #fff8e1;
+      border-left: 3px solid #f0b800;
+      border-radius: 0 5px 5px 0;
+      padding: 8px 12px;
+      margin: 8px 0;
+      font-size: 0.87em;
+      font-weight: 600;
+      color: #5a4500;
+    }
+
+    /* Warning */
+    .warn {
+      color: #b33;
+      font-weight: 600;
+    }
+
+    /* Online check-in callout */
+    .checkin-callout {
+      background: #edf4ff;
+      border: 1px solid #bcd4f0;
+      border-radius: 5px;
+      padding: 8px 12px;
+      margin: 8px 0;
+      font-size: 0.85em;
+      color: #1a3a5c;
+    }
+
+    /* ── Confirmation Footer ── */
+    .conf-strip {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed #ccc;
+      font-size: 0.78em;
+      color: #666;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    /* ── Cost badge ── */
+    .cost-row {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .cost-pill {
+      background: #e8f0fa;
+      color: #1a3a5c;
+      font-size: 0.82em;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+
+    /* ── Document footer ── */
+    .doc-footer {
+      text-align: center;
+      font-size: 0.75em;
+      color: #999;
+      padding: 14px 0 4px;
+    }
+
+    /* ────────────────────────────────────────
+       PRINT STYLES — Black on White
+    ──────────────────────────────────────── */
+    @media print {
+      @page {
+        size: letter portrait;
+        margin: 0.5in;
+      }
+
+      body {
+        background: #fff !important;
+        padding: 0;
+        font-size: 13px;
+        color: #000 !important;
+      }
+
+      .page { max-width: 100%; }
+
+      /* ── Document header: black border box, white bg ── */
+      .doc-header {
+        background: #fff !important;
+        color: #000 !important;
+        border: 2px solid #000;
+        border-bottom: none;
+        border-radius: 0;
+        padding: 12px 16px;
+      }
+      .doc-header h1 { color: #000 !important; font-size: 1.3em; }
+      .doc-header .meta { color: #000 !important; opacity: 1; }
+
+      /* ── Day divider: bold rule, black text, white bg ── */
+      .day-divider {
+        background: #fff !important;
+        color: #000 !important;
+        border-top: 2px solid #000;
+        border-left: 2px solid #000;
+        border-right: 2px solid #000;
+        border-bottom: 1px solid #555;
+        padding: 5px 16px;
+        font-size: 0.82em;
+      }
+
+      /* ── Cards: white bg, full black border box ── */
+      .card {
+        background: #fff !important;
+        border: 2px solid #000 !important;
+        border-top: none !important;
+        border-left: 2px solid #000 !important;
+        border-radius: 0 !important;
+        padding: 11px 14px;
+        break-inside: avoid;
+      }
+      /* Separate cards visually with a dividing rule */
+      .card + .card { border-top: 1px solid #555 !important; }
+      /* Last card closes the outer box */
+      .card:last-child { border-bottom: 2px solid #000 !important; }
+
+      /* Remove tinted backgrounds from all card types */
+      .card.flight, .card.transfer, .card.hotel { background: #fff !important; }
+
+      /* ── Badges: white bg, black outline, black text ── */
+      .badge {
+        background: #fff !important;
+        color: #000 !important;
+        border: 1px solid #000;
+      }
+      .badge-flight, .badge-transfer, .badge-hotel {
+        background: #fff !important;
+        color: #000 !important;
+      }
+
+      /* ── Route line ── */
+      .route { color: #000 !important; }
+      .route .arrow { color: #000 !important; }
+
+      /* ── Passenger pills: white bg, black border ── */
+      .pax {
+        background: #fff !important;
+        color: #000 !important;
+        border: 1px solid #000;
+      }
+      .pax span { color: #000 !important; }
+
+      /* ── Step numbers: solid black circle, white numeral ── */
+      .step-num {
+        background: #000 !important;
+        color: #fff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .step-body strong { color: #000 !important; }
+
+      /* ── Details & body text ── */
+      .details { color: #000 !important; }
+      .warn { color: #000 !important; }
+
+      /* ── ATM callout: black border box ── */
+      .atm-callout {
+        background: #fff !important;
+        color: #000 !important;
+        border: 2px solid #000 !important;
+        border-left-width: 4px !important;
+        border-radius: 0 !important;
+        padding: 8px 12px;
+      }
+
+      /* ── Check-in callout: black border box ── */
+      .checkin-callout {
+        background: #fff !important;
+        color: #000 !important;
+        border: 1.5px solid #000 !important;
+        border-radius: 0 !important;
+      }
+
+      /* ── Confirmation strip ── */
+      .conf-strip {
+        color: #000 !important;
+        font-style: normal;
+        font-weight: 600;
+        border-top: 1px dashed #000;
+      }
+
+      /* ── Cost pills: white bg, black border ── */
+      .cost-pill {
+        background: #fff !important;
+        color: #000 !important;
+        border: 1px solid #000;
+        border-radius: 0 !important;
+      }
+
+      /* ── Document footer ── */
+      .doc-footer { color: #000 !important; }
+    }
+
+    /* ────────────────────────────────────────
+       MOBILE (iPhone)
+    ──────────────────────────────────────── */
+    @media screen and (max-width: 600px) {
+      body {
+        padding: 0;
+        font-size: 14px;
+        background: #eef2f7;
+      }
+
+      .page { max-width: 100%; }
+
+      .doc-header {
+        border-radius: 0;
+        padding: 16px 16px 14px;
+      }
+      .doc-header h1 { font-size: 1.1em; }
+
+      .day-divider { padding: 6px 16px; font-size: 0.75em; }
+
+      .card { padding: 14px 14px 12px; }
+      .card:last-child { border-radius: 0; }
+
+      .card-title { font-size: 1.05em; }
+
+      .pax-row { gap: 8px; }
+      .pax { font-size: 0.9em; padding: 6px 10px; }
+
+      .route { font-size: 1.1em; }
+      .details { font-size: 0.92em; line-height: 1.65; }
+      .steps li { font-size: 0.92em; }
+      .step-num { width: 20px; height: 20px; font-size: 0.72em; }
+      .atm-callout { font-size: 0.92em; padding: 10px 12px; }
+      .conf-strip { font-size: 0.82em; }
+
+      .doc-footer { padding: 16px 16px 24px; }
+    }
+
+    /* ── Leech warning — red on screen, black on print ── */
+    .callout-warn {
+      background: #fff0f0;
+      border: 1.5px solid #c0392b;
+      border-left: 4px solid #c0392b;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 12px 0;
+      color: #7a0000;
+      font-size: 0.9em;
+      line-height: 1.55;
+    }
+    @media print {
+      .callout-warn {
+        background: #fff !important;
+        border: 1.5px solid #000 !important;
+        border-left: 4px solid #000 !important;
+        color: #000 !important;
+      }
+      .callout-warn strong { color: #000 !important; }
+    }
+
+    /* ── Pre-departure prep card (purple accent) ── */
+    .card.prep  { border-left-color: #7a3a9c; background: #faf5ff; }
+    .badge-prep { background: #e8d4f8; color: #5a1a7a; }
+
+    /* ── Arrival process card (orange accent) ── */
+    .card.arrival  { border-left-color: #c85a00; background: #fff8f4; }
+    .badge-arrival { background: #fce0c8; color: #7a3000; }
+
+    /* ── VJW registration callout ── */
+    .vjw-callout {
+      background: #f0f7ef;
+      border: 1px solid #a0c8a0;
+      border-left: 4px solid #2d7a3a;
+      border-radius: 0 5px 5px 0;
+      padding: 8px 12px;
+      margin: 8px 0;
+      font-size: 0.87em;
+      color: #1a4a1a;
+      line-height: 1.55;
+    }
+
+    /* ── Settings table ── */
+    .settings-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .settings-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83em;
+      margin: 8px 0;
+    }
+    .settings-table th {
+      background: #2a5a8c;
+      color: #fff;
+      padding: 6px 10px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.85em;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .settings-table td {
+      padding: 5px 10px;
+      border-bottom: 1px solid #dce8f4;
+      vertical-align: top;
+      line-height: 1.45;
+    }
+    .settings-table tbody tr:nth-child(even) td { background: #f4f9ff; }
+    .col-setting { font-weight: 600; color: #1a3a5c; width: 28%; }
+    .col-path    { color: #555; font-style: italic; width: 44%; font-size: 0.95em; }
+    .col-action  { font-weight: 600; color: #1a5a00; width: 28%; }
+
+    @media screen and (max-width: 600px) {
+      .settings-table-wrap { overflow-x: auto; }
+      .settings-table { min-width: 500px; }
+    }
+
+    @media print {
+      .card.prep, .card.arrival { background: #fff !important; }
+      .badge-prep, .badge-arrival {
+        background: #fff !important;
+        color: #000 !important;
+        border: 1px solid #000;
+      }
+      .vjw-callout {
+        background: #fff !important;
+        border: 1.5px solid #000 !important;
+        border-left: 4px solid #000 !important;
+        color: #000 !important;
+      }
+      .settings-table th {
+        background: #000 !important;
+        color: #fff !important;
+      }
+      .settings-table tbody tr:nth-child(even) td {
+        background: #f0f0f0 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .settings-table td { border-bottom: 1px solid #aaa; color: #000 !important; }
+      .col-setting { color: #000 !important; }
+      .col-path    { color: #000 !important; }
+      .col-action  { color: #000 !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ════ DOCUMENT HEADER ════ -->
+  <div class="doc-header">
+    <h1>Travel Logistics &mdash; Kauai to Kii-Tanabe</h1>
+    <div class="meta">
+      May 18&ndash;20, 2026 &nbsp;&bull;&nbsp; Matthew Wong &amp; Mary Siu &nbsp;&bull;&nbsp; 3 Segments
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       PRE-DEPARTURE — IPHONE ESIM SETUP
+  ════════════════════════════════════ -->
+  <div class="day-divider">Pre-Departure &mdash; iPhone eSIM Setup</div>
+
+  <!-- Card: iPhone Settings -->
+  <div class="card prep">
+    <div class="card-header">
+      <span class="badge badge-prep">iPhone</span>
+      <div class="card-title">
+        Configure iPhone Before Departing Home
+        <small>Japan eSIM already installed &nbsp;&bull;&nbsp; Complete all settings before leaving the house</small>
+      </div>
+    </div>
+
+    <div class="details">
+      <p>These settings ensure the Japan eSIM activates automatically on landing and prevent background services from consuming eSIM data during the trip.</p>
+    </div>
+
+    <div class="settings-table-wrap">
+      <table class="settings-table">
+        <thead>
+          <tr>
+            <th class="col-setting">Setting</th>
+            <th class="col-path">Path</th>
+            <th class="col-action">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-setting">Japan eSIM &mdash; Cellular Data line</td>
+            <td class="col-path">Settings &rarr; Cellular &rarr; Cellular Data</td>
+            <td class="col-action">Select Japan eSIM line</td>
+          </tr>
+          <tr>
+            <td class="col-setting">Japan eSIM &mdash; Data Roaming</td>
+            <td class="col-path">Settings &rarr; Cellular &rarr; [Japan eSIM line]</td>
+            <td class="col-action">Turn Data Roaming <strong>ON</strong></td>
+          </tr>
+          <tr>
+            <td class="col-setting">Home SIM &mdash; Data Roaming</td>
+            <td class="col-path">Settings &rarr; Cellular &rarr; [Home SIM line]</td>
+            <td class="col-action">Turn Data Roaming <strong>OFF</strong></td>
+          </tr>
+          <tr>
+            <td class="col-setting">Background App Refresh</td>
+            <td class="col-path">Settings &rarr; General &rarr; Background App Refresh</td>
+            <td class="col-action">Set to Wi-Fi Only</td>
+          </tr>
+          <tr>
+            <td class="col-setting">App Store &mdash; Auto Downloads</td>
+            <td class="col-path">Settings &rarr; App Store</td>
+            <td class="col-action">Disable Automatic Downloads &amp; App Updates over cellular</td>
+          </tr>
+          <tr>
+            <td class="col-setting">Photos &mdash; iCloud Sync</td>
+            <td class="col-path">Settings &rarr; Photos &rarr; iCloud Photos</td>
+            <td class="col-action">Set to Wi-Fi Only</td>
+          </tr>
+          <tr>
+            <td class="col-setting">Mail &mdash; Fetch</td>
+            <td class="col-path">Settings &rarr; Mail &rarr; Fetch New Data</td>
+            <td class="col-action">Set to Manual</td>
+          </tr>
+          <tr>
+            <td class="col-setting">Date &amp; Time</td>
+            <td class="col-path">Settings &rarr; General &rarr; Date &amp; Time</td>
+            <td class="col-action">Enable Set Automatically (handles JST)</td>
+          </tr>
+          <tr>
+            <td class="col-setting">Visit Japan Web &mdash; Add to Home Screen</td>
+            <td class="col-path">Safari &rarr; vjw-lp.digital.go.jp &rarr; Share &rarr; Add to Home Screen</td>
+            <td class="col-action">Install as PWA icon; then log in &amp; activate offline mode before boarding at HNL</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       MON MAY 18 — KAUAI → HONOLULU → TOKYO
+  ════════════════════════════════════ -->
+  <div class="day-divider">Monday, May 18 &mdash; Kauai &rarr; Honolulu &rarr; Tokyo</div>
+
+  <!-- Card 1: LIH → HNL -->
+  <div class="card flight">
+    <div class="card-header">
+      <span class="badge badge-flight">Flight 1 of 2</span>
+      <div class="card-title">
+        Alaska AS1074 &mdash; 12:57 PM &ndash; 1:37 PM
+        <small>Operated as Hawaiian Airlines &nbsp;&bull;&nbsp; ~40 min</small>
+      </div>
+    </div>
+
+    <div class="route">LIH <span class="arrow">&rarr;</span> HNL</div>
+
+    <div class="pax-row">
+      <div class="pax">Matthew Wong &nbsp;<span>Seat 11E &bull; Class Q (Main)</span></div>
+      <div class="pax">Mary Siu &nbsp;<span>Seat 11G &bull; Class Q (Main)</span></div>
+    </div>
+
+    <div class="details">
+      <p><strong>Target arrival at Lihue Airport: 9:55 AM</strong> (flight departs 12:57 PM &mdash; allow time for the steps below).</p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>USDA Agriculture Inspection</strong>
+          Before check-in, bring checked bags to the USDA Agriculture Inspection station in the lobby. Required first step in Hawaii for all departing bags. Takes only a minute but must be done before the counter.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Check-in Counter (Hawaiian Airlines)</strong>
+          Check in at Hawaiian Airlines counters (not Alaska) &mdash; this flight is operated by Hawaiian Airlines. Request bags tagged all the way to <strong>HND (Tokyo Haneda)</strong>; they transfer automatically in Honolulu and do not need to be picked up there.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Passport Check</strong>
+          The agent will verify passports at the counter (required for international destinations). Have both passports ready.
+        </div>
+      </li>
+    </ol>
+
+    <div class="checkin-callout">
+      <strong>Online Check-in:</strong> Check in 24 hrs in advance at <strong>HawaiianAirlines.com</strong> &mdash; confirmation code <strong>SQYNTD</strong>. You will still need to visit the counter for bag drop and passport verification.
+    </div>
+
+    <div class="conf-strip">Conf: SQYNTD</div>
+  </div>
+
+  <!-- Card 2: HNL → HND -->
+  <div class="card flight">
+    <div class="card-header">
+      <span class="badge badge-flight">Flight 2 of 2</span>
+      <div class="card-title">
+        Alaska AS831 &mdash; 3:25 PM &ndash; 7:25 PM (+1)
+        <small>Operated as Hawaiian Airlines &nbsp;&bull;&nbsp; Overnight transpacific</small>
+      </div>
+    </div>
+
+    <div class="route">HNL <span class="arrow">&rarr;</span> HND</div>
+
+    <div class="details">
+      <p>Arrives <strong>Tuesday, May 19 at 7:25 PM Tokyo time (JST)</strong>.</p>
+      <p>Same Hawaiian Airlines confirmation. Visit <strong>HawaiianAirlines.com</strong> with confirmation code <strong>SQYNTD</strong> to view reservation, confirm seat selection, and check in.</p>
+    </div>
+
+    <div class="conf-strip">Conf: SQYNTD</div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       TUE MAY 19 — ARRIVE TOKYO
+  ════════════════════════════════════ -->
+  <div class="day-divider">Tuesday, May 19 &mdash; Arrive Tokyo (Haneda)</div>
+
+  <!-- Card 3: Haneda Arrivals Process -->
+  <div class="card arrival">
+    <div class="card-header">
+      <span class="badge badge-arrival">Arrivals</span>
+      <div class="card-title">
+        HND Terminal 3 &mdash; Immigration, Baggage &amp; Customs
+        <small>Flight arrives 7:25 PM JST &nbsp;&bull;&nbsp; Allow ~45&ndash;60 min through to Arrivals Lobby</small>
+      </div>
+    </div>
+
+    <div class="vjw-callout">
+      <strong>&#10003; Visit Japan Web registered (vjw-lp.digital.go.jp)</strong> &mdash; Both travelers registered under one account. QR codes are already generated and waiting in your VJW account &mdash; no action needed at the airport beyond opening the site.<br><br>
+      <strong>VJW is a web app, not an App Store download.</strong> Access it via Safari at <em>vjw-lp.digital.go.jp</em>. Any &ldquo;Visit Japan Web&rdquo; apps in the App Store are unofficial third-party apps &mdash; ignore them. To make it feel native: in Safari tap <strong>Share &rarr; Add to Home Screen</strong> &mdash; this installs VJW as a PWA icon on your iPhone. Do this before departure.<br><br>
+      <strong>To reach your QR code:</strong> Home screen &rarr; <em>Register planned entry/return</em> &rarr; tap <strong>&ldquo;Kumano Kodo&rdquo;</strong> &rarr; select the <strong>Applicant</strong> (Matthew or Mary) &rarr; tap <strong>&ldquo;Display QR Code&rdquo;</strong> at the bottom &rarr; QR displays on next screen. Each traveler has their own QR; it covers <strong>both immigration and customs</strong> in one code &mdash; repeat by going back and selecting the other Applicant.<br>
+      <em>Account (digital.go.jp): </em><strong>mattwongucb@gmail.com</strong> &mdash; password shared with Mary via secure password manager.<br><br>
+      <strong class="warn">&#9888; Screenshots and printed QR codes are NOT accepted</strong> &mdash; must be displayed live from the VJW site. <strong>Before boarding at HNL: log in to VJW on Wi-Fi and activate offline mode</strong> (tap &ldquo;Use the Visit Japan Web site offline&rdquo; in the menu); QR codes will then display without internet through immigration. Keep the browser open &mdash; do not close Safari. VJW replaces all paper landing cards; no forms to fill out on the plane.
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Disembark &rarr; Follow Arrival Signs (入国審査)</strong>
+          After exiting the aircraft follow overhead signs for <em>Arrivals / Immigration</em>. Foreign nationals proceed to the <strong>Foreign Passport</strong> lanes &mdash; separate from Japanese national / residence card holders.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Joint Kiosk &mdash; Combined Immigration &amp; Customs QR (one per person)</strong>
+          HND uses Joint Kiosks that handle immigration <em>and</em> customs in a single scan &mdash; there is no separate customs stop later. Each traveler goes through their own kiosk. Open VJW in Safari &rarr; tap <strong>&ldquo;Kumano Kodo&rdquo;</strong> &rarr; <strong>select the Applicant</strong> (Matthew or Mary) &rarr; tap <strong>&ldquo;Display QR Code&rdquo;</strong>. Scan the QR, place fingers on the fingerprint reader, look into the camera &mdash; gate opens on match. Go back, switch Applicant, and repeat for the second traveler. No passport stamp is issued at the kiosk. <span class="warn">If a kiosk is closed or errors</span>, proceed to a staffed counter; the officer will verify VJW on screen or issue a paper card.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Baggage Reclaim (手荷物受取)</strong>
+          Proceed to the Baggage Claim hall. Check the overhead monitors for your belt number (flight <strong>HA831 / AS831 from HNL</strong>). Collect both checked bags. If a bag has not appeared within 30 minutes, report to the Baggage Services desk <em>before</em> exiting the secure area &mdash; you cannot re-enter once through customs.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Green Channel (税関) &mdash; No Scan Needed</strong>
+          Customs was already declared at the Joint Kiosk in Step&nbsp;2 &mdash; no second scan required. After collecting bags, follow signs for <strong>税関 / Customs</strong> and take the <strong>green channel</strong> (nothing to declare). An officer may wave you through or briefly inspect bags; this is routine. Duty-free allowances per person: alcohol 3 bottles (760 ml ea) &bull; tobacco 200 cigarettes &bull; gifts &amp; goods up to &yen;200,000.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <strong>Exit to Arrivals Lobby (2F, T3)</strong>
+          After customs you are in the public Arrivals Lobby. <strong>Seven Bank ATM is on 2F here</strong> &mdash; withdraw JPY now (see hotel card below). Hotel Villa Fontaine Grand Haneda is connected directly to T3 via a covered walkway; follow hotel signs from the Arrivals Lobby.
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- Card 4: Yamato Wine Shipping -->
+  <div class="card transfer">
+    <div class="card-header">
+      <span class="badge badge-transfer">Shipping</span>
+      <div class="card-title">
+        Yamato TA-Q-BIN &mdash; Wine Shipping
+        <small>Haneda T3, 2F &nbsp;&bull;&nbsp; Send counter in Arrivals area</small>
+      </div>
+    </div>
+
+    <div class="route">HND T3 <span class="arrow">&rarr;</span> Seika, Souraku, Kyoto</div>
+
+    <div class="details">
+      <p><strong>2 bottles of wine</strong> &nbsp;&bull;&nbsp; Yamato 2-bottle Bottle Box required (purchased at counter) &nbsp;&bull;&nbsp; Card accepted.</p>
+      <p>Yamato will <strong>not</strong> accept unpacked bottles &mdash; the official Bottle Box is mandatory and purchased on the spot.</p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Go to Yamato Counter &mdash; 2F, T3 Arrivals</strong>
+          After clearing customs, the Yamato TA-Q-BIN Send counter is on 2F of T3, in the Arrivals lobby area. <span class="warn">Counter may close around 8:00&ndash;9:00 PM</span> &mdash; given the 7:25 PM arrival you may be tight. If closed: drop at the <strong>hotel front desk</strong> (Hotel Villa Fontaine Grand has Yamato collection) the same night or next morning (May 20) before checkout.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Purchase a 2-Bottle Bottle Box (ボトルBOX)</strong>
+          Ask for a Bottle Box for 2 bottles &mdash; designed for wine and western spirits. ~&yen;190&ndash;250. Staff will assist with packing.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Complete the TA-Q-BIN Delivery Slip</strong>
+          Fill in recipient and sender details (see below). For <strong>Sender</strong>, use Hotel Villa Fontaine Grand Haneda Airport, not a Hawaii address. Choose standard delivery (next day to Kyoto area) or Cool TA-Q-BIN for temperature control.
+        </div>
+      </li>
+    </ol>
+
+    <div class="atm-callout" style="border-left-color:#2a7abf; background:#edf4ff; color:#1a3a5c;">
+      <strong>&#128236; Recipient Address (宛先)</strong><br>
+      Ikuo Minakata &nbsp;&bull;&nbsp; Tel: <strong>090-3359-5244</strong><br>
+      〒619-0232<br>
+      2-34-3 Sakuragaoka, Seika, Souraku-gun, Kyoto<br>
+      <em style="font-size:0.9em; color:#555;">Note: confirm Japanese characters for recipient name with Minakata-san; do not guess kanji for a personal name on a delivery slip.</em>
+    </div>
+
+    <div class="cost-row">
+      <span class="cost-pill">Bottle Box ~&yen;200 &nbsp;&bull;&nbsp; Shipping ~&yen;1,200&ndash;&yen;1,800 &nbsp;&bull;&nbsp; Card accepted</span>
+    </div>
+  </div>
+
+  <!-- Card 5: Hotel Haneda -->
+  <div class="card hotel">
+    <div class="card-header">
+      <span class="badge badge-hotel">Hotel</span>
+      <div class="card-title">
+        Hotel Villa Fontaine Grand Haneda Airport
+        <small>Directly connected to Haneda Airport Terminal 3</small>
+      </div>
+    </div>
+
+    <div class="route" style="font-size:0.9em;color:#2d7a3a;">Haneda / Tokyo &nbsp;&bull;&nbsp; 2-7-1 Hanedakuko, Oota, Tokyo 144-0041</div>
+
+    <div class="details">
+      <p><strong>Check-in:</strong> 3:00 PM &nbsp;&bull;&nbsp; <strong class="warn">Check-out by 9:30 AM</strong> (latest 11:00 AM, but JAL 215 departs T1 at 11:30 &mdash; allow 20 min shuttle T3&rarr;T1 + check-in + security).</p>
+      <p>1 night &middot; 2 adults &middot; 1 room.</p>
+    </div>
+
+    <div class="atm-callout">
+      &#128719; PRIMARY JPY WITHDRAWAL &mdash; Seven Bank ATM, HND T3 (2F) Arrival Lobby<br>
+      Withdraw <strong>&yen;40,000</strong> for 2 travelers. Covers: Kumano local buses (~&yen;5,000), Takkyubin 2 bags (~&yen;5,000), onsen taxes (~&yen;600), Suica loads (&yen;8,000), Dual Pilgrim Cert (&yen;1,000), Ekiben (~&yen;2,500), misc incidentals (~&yen;5,000).<br>
+      <span style="font-weight:400;">Hotel laundry, taxi &amp; Yamato wine shipping paid by card. SHM &amp; Kii-Tanabe ATMs are backup only.</span>
+    </div>
+
+    <div class="conf-strip">Conf: 20260206117824862 &nbsp;&bull;&nbsp; Expedia: 73367120065821</div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       WED MAY 20 — HANEDA → KII-TANABE
+  ════════════════════════════════════ -->
+  <div class="day-divider">Wednesday, May 20 &mdash; Haneda &rarr; Nanki-Shirahama &rarr; Kii-Tanabe</div>
+
+  <!-- Card: Depart Tokyo — Checkout & T3→T1 Transfer -->
+  <div class="card transfer">
+    <div class="card-header">
+      <span class="badge badge-transfer">Departure</span>
+      <div class="card-title">
+        Depart Tokyo &mdash; Hotel Checkout &amp; Transfer to T1
+        <small>JAL JL215 departs 11:30 AM &nbsp;&bull;&nbsp; Bag drop closes 11:00 AM &mdash; do not miss</small>
+      </div>
+    </div>
+
+    <div class="details">
+      <p><strong>Target sequence &mdash; allow no slippage past 9:30 AM checkout:</strong></p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>9:30 AM &mdash; Hotel Checkout</strong>
+          Check out of Hotel Villa Fontaine Grand Haneda Airport. Latest absolute checkout is 11:00 AM but departing by 9:30 AM is required to make the flight comfortably. Settle any incidentals at the front desk by card.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>9:30 AM &mdash; Yamato Wine Drop-off (if not done night before)</strong>
+          If wine was not shipped at the T3 counter on arrival night, hand the boxed package to the <strong>hotel front desk</strong> for Yamato collection before checkout. Confirm the delivery slip is fully filled in (recipient, sender, phone number).
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>~9:40 AM &mdash; Free Inter-Terminal Shuttle T3 &rarr; T1</strong>
+          From the hotel, walk to <strong>T3, 1F (Arrivals level) &rarr; Bus Stop 0</strong>. Board the free shuttle to Terminal 1 &amp; 2. Frequency: every <strong>4 minutes</strong> during morning hours. Journey: <strong>~5 minutes</strong>. No ticket needed &mdash; just board.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>~10:00 AM &mdash; JAL Check-in at T1</strong>
+          Proceed to the <strong>JAL check-in area, Terminal 1</strong>. Use a Self Check-in Kiosk to print baggage tags (conf: <strong>B68HAR</strong>) then drop bags at the Self Baggage Drop counter. Alternatively use a staffed counter. <span class="warn">Bag drop closes at 11:00 AM sharp (30 min before departure)</span> &mdash; do not cut this close.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <strong>~10:20 AM &mdash; Security &amp; Gate</strong>
+          Proceed through security. Domestic security at HND T1 is typically 10&ndash;15 minutes. Aim to be at the gate by <strong>10:45 AM</strong> for an 11:30 AM departure.
+        </div>
+      </li>
+    </ol>
+
+    <div class="checkin-callout">
+      <strong>Online Check-in:</strong> Check in at <strong>jal.co.jp</strong> using confirmation <strong>B68HAR</strong> the day before to select seats and generate a mobile boarding pass &mdash; speeds up the kiosk step.
+    </div>
+  </div>
+
+  <!-- Card: JAL HND → SHM -->
+  <div class="card flight">
+    <div class="card-header">
+      <span class="badge badge-flight">Flight</span>
+      <div class="card-title">
+        Japan Airlines JL215 &mdash; 11:30 AM &ndash; 12:45 PM
+        <small>Economy / Coach (N) &nbsp;&bull;&nbsp; 1h 15m</small>
+      </div>
+    </div>
+
+    <div class="route">HND (T1) <span class="arrow">&rarr;</span> SHM (Nanki-Shirahama)</div>
+
+    <div class="pax-row">
+      <div class="pax">Matthew Wong &nbsp;<span>Seat 17C</span></div>
+      <div class="pax">Mary Siu Wong &nbsp;<span>Seat 17H</span></div>
+    </div>
+
+    <div class="details">
+      <p>Departs <strong>Terminal 1, Haneda</strong>. Arrives Nanki-Shirahama 12:45 PM.</p>
+      <p>Free checked bag: <strong>2 pieces</strong> (per e-ticket).</p>
+      <p class="warn">Fare: NONEND/NONCHNG &mdash; non-changeable &amp; non-refundable.</p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Arrivals &amp; Baggage Reclaim &mdash; SHM is one small hall</strong>
+          After landing, follow the single corridor to the arrivals hall. Nanki-Shirahama has one baggage carousel &mdash; all bags from JL215 will arrive there. Domestic flight; no immigration or customs. Bags typically delivered within 10&ndash;15 minutes of landing.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>If a Bag is Missing</strong>
+          Report immediately to the <strong>JAL ground staff desk inside the arrivals hall</strong> before exiting. Do not leave the terminal. File a Property Irregularity Report (PIR) on the spot; JAL will arrange delivery to Comfort Hotel Kii-Tanabe.
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Exit to Taxi Stand</strong>
+          Once bags are collected, proceed through the single exit to the taxi stand directly outside arrivals. See transfer card below.
+        </div>
+      </li>
+    </ol>
+
+    <div class="cost-row">
+      <span class="cost-pill">~$109 USD &nbsp;&bull;&nbsp; JPY 14,800 + tax</span>
+    </div>
+
+    <div class="conf-strip">Conf: B68HAR &nbsp;&bull;&nbsp; Expedia: 73367907662844 &nbsp;&bull;&nbsp; Ticket: 1317467296967 (Matthew)</div>
+  </div>
+
+  <!-- Card 5: Taxi SHM → Kii-Tanabe -->
+  <div class="card transfer">
+    <div class="card-header">
+      <span class="badge badge-transfer">Transfer</span>
+      <div class="card-title">
+        Taxi from SHM Airport
+        <small>~15&ndash;20 min</small>
+      </div>
+    </div>
+
+    <div class="route">SHM <span class="arrow">&rarr;</span> Kii-Tanabe</div>
+
+    <div class="atm-callout" style="border-left-color:#2a7abf;background:#edf4ff;color:#1a3a5c;">
+      &#128719; ATM: Seven Bank inside SHM Airport (backup withdrawal point).
+    </div>
+
+    <div class="details">
+      <p>Taxi stand is directly outside the arrivals exit. Request drop-off at:<br>
+      <strong>Comfort Hotel Kii-Tanabe</strong> &mdash; 47-31 Minato, Tanabe. No luggage restrictions.</p>
+    </div>
+
+    <div class="cost-row">
+      <span class="cost-pill">&yen;3,500&ndash;&yen;4,700 &nbsp;&bull;&nbsp; ~15&ndash;20 min &nbsp;&bull;&nbsp; Card accepted</span>
+    </div>
+  </div>
+
+  <!-- Card 6: Comfort Hotel -->
+  <div class="card hotel">
+    <div class="card-header">
+      <span class="badge badge-hotel">Hotel</span>
+      <div class="card-title">
+        Comfort Hotel Kii Tanabe
+      </div>
+    </div>
+
+    <div class="route" style="font-size:0.9em;color:#2d7a3a;">Tanabe City &nbsp;&bull;&nbsp; 47-31 Minato, Tanabe, Wakayama 646-0031</div>
+
+    <div class="details">
+      <p><strong>Check-in:</strong> 3:00 PM &nbsp;&bull;&nbsp; <strong>Check-out:</strong> Thu May 21, 10:00 AM.</p>
+      <p>1 night &middot; 2 adults &middot; 1 room.</p>
+      <p>Early arrival? Store bags at the front desk or station coin lockers (~&yen;700).</p>
+    </div>
+
+    <div class="conf-strip">Conf: 17894417 &nbsp;&bull;&nbsp; Expedia: 73367130267265</div>
+  </div>
+
+  <div class="checkin-callout" style="margin: 12px 0; font-size:0.88em; line-height:1.6;">
+    <strong>&#128213; Before Starting the Trek: Pick Up the Dual Pilgrim Booklet</strong><br>
+    Collect the <strong>Dual Pilgrim booklet</strong> (Pilgrims&rsquo; Passport) from the <strong>Tanabe Tourist Information Center</strong>, located directly next to JR Kii-Tanabe Station &mdash; it is <strong>free</strong>. Stamps are collected at designated checkpoints along the Nakahechi route and serve as the official record required to claim a Dual Pilgrim Certificate (Kumano Kodo + Camino de Santiago).<br><br>
+    <em>Note: the Wakayama Prefecture stamp booklet (&yen;100, Japanese-language) is no longer available at the Tanabe TIC &mdash; it can be picked up at Kumano Kodo Kan Pilgrimage Center further along the trail.</em>
+  </div>
+
+  <div class="callout-warn">
+    <strong>&#9888; Before Starting the Trek: Purchase &amp; Apply Yamabiru-fai</strong>
+    Buy <strong>Yamabiru-fai</strong> (leech repellent spray) before leaving Kii-Tanabe &mdash; available at drug stores near the station. Apply to shoes, socks, and lower legs before starting the trek to Takahara Kiri no Sato. The cedar forest trail is prime leech habitat, especially after rain.
+  </div>
+
+  <div class="doc-footer">Japan Itinerary &mdash; May 2026 &nbsp;|&nbsp; Kumano Travel Res #186433</div>
+
+</div>
+</body>
+</html>

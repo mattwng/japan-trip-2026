@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Trip Files &mdash; May&ndash;Jun 2026</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:rgba(26,115,232,.12); }
+    body {
+      font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;
+      font-size:14px; color:#222; background:#eef2f7;
+      padding:0 0 32px;
+    }
+
+    .header {
+      background:#1a3a5c; color:#fff;
+      padding:20px 20px 16px;
+    }
+    .header h1 { font-size:1.2em; font-weight:700; margin-bottom:4px; letter-spacing:-0.2px; }
+    .header .sub { font-size:0.8em; opacity:0.78; line-height:1.5; }
+
+    .server-box {
+      background:#fff8e1; border-left:4px solid #e0a000;
+      padding:11px 16px; font-size:0.84em; color:#4a3000;
+      line-height:1.6;
+    }
+    .server-box strong { display:block; color:#2a1800; margin-bottom:2px; font-size:0.9em; text-transform:uppercase; letter-spacing:0.5px; }
+    .server-box code {
+      font-family:monospace; font-size:1.05em; font-weight:700;
+      color:#1a3a5c; background:#fff3cd; padding:2px 6px; border-radius:4px;
+      display:inline-block; margin:2px 0;
+    }
+    .server-box .note { font-size:0.87em; color:#6a4800; margin-top:3px; }
+
+    .section {
+      background:#2a5a8c; color:#fff;
+      font-size:0.72em; font-weight:700; letter-spacing:1px;
+      text-transform:uppercase; padding:7px 20px;
+      margin-top:12px;
+    }
+    .section:first-of-type { margin-top:0; }
+
+    a.row {
+      display:flex; align-items:center; gap:12px;
+      background:#fff; border-left:4px solid #ccc;
+      padding:13px 16px; border-bottom:1px solid #eee;
+      text-decoration:none; color:#111;
+      min-height:58px;
+      transition:background .1s;
+    }
+    a.row:active { background:#f0f4f8; }
+    a.row:last-of-type { border-bottom:none; }
+
+    .row-icon {
+      font-size:1.3em; flex-shrink:0; width:26px;
+      text-align:center; line-height:1;
+    }
+    .row-text { flex:1; min-width:0; }
+    .row-name { font-weight:700; font-size:0.95em; color:#1a3a5c; line-height:1.3; }
+    .row-desc { font-size:0.77em; color:#666; margin-top:2px; line-height:1.4; }
+    .row-arrow { color:#b0b8c8; font-size:1.1em; flex-shrink:0; }
+
+    /* Border colours by type */
+    a.hike  { border-left-color:#3a7a3a; }
+    a.tour  { border-left-color:#1a6a7a; }
+    a.food  { border-left-color:#8a5a1a; }
+    a.transit { border-left-color:#2a5a8c; background:#f8fafc; }
+    a.korea { border-left-color:#5a2a7a; }
+    a.depart { border-left-color:#c0392b; background:#fff8f8; }
+    a.test  { border-left-color:#c8a800; background:#fffdf0; }
+
+    .section.korea { background:#3a1a5a; }
+    .section.test  { background:#6a5a00; }
+
+    .date-pill {
+      display:inline-block; font-size:0.72em; font-weight:600;
+      background:#eef2f7; color:#2a5a8c; border:1px solid #c0d0e0;
+      padding:1px 7px; border-radius:10px; white-space:nowrap;
+      margin-right:4px; vertical-align:middle;
+    }
+
+    @media (min-width:600px) {
+      body { padding:20px 20px 48px; }
+      .header { border-radius:10px 10px 0 0; }
+      .inner { max-width:540px; margin:0 auto; box-shadow:0 2px 18px rgba(0,0,0,.12); border-radius:10px; overflow:hidden; }
+    }
+  </style>
+</head>
+<body>
+<div class="inner">
+
+  <div class="header">
+    <h1>&#128507; Trip Files &mdash; May&ndash;Jun 2026</h1>
+    <div class="sub">Matthew &amp; Mary &nbsp;&bull;&nbsp; Kauai &rarr; Japan &rarr; Korea &rarr; SFO</div>
+  </div>
+
+  <div class="server-box">
+    <strong>&#128246; Open on home Wi-Fi</strong>
+    <code>http://192.168.68.110:8765/</code>
+    <div class="note">Mac must be on &amp; server running &nbsp;&bull;&nbsp; Both you and iPhone on same Wi-Fi<br>
+    Start server: <code style="font-size:0.9em;">cd ~/Desktop &amp;&amp; python3 -m http.server 8765</code></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section">&#127981; Japan &mdash; Kumano Kodo &nbsp;&bull;&nbsp; May&ndash;Jun 2026</div>
+
+  <a class="row transit" href="Japan%20Itinerary/Kauai-Kii-Tanabe.html">
+    <div class="row-icon">&#9992;</div>
+    <div class="row-text">
+      <div class="row-name"><span class="date-pill">May 18&ndash;20</span> Kauai &rarr; Kii-Tanabe</div>
+      <div class="row-desc">Travel logistics &bull; 3-segment flight &bull; Arrival in Japan</div>
+    </div>
+    <div class="row-arrow">&#8250;</div>
+  </a>
+
+  <a class="row transit" href="Japan%20Itinerary/Kii-Tanabe-Takijiri.html">
+    <div class="row-icon">&#127981;</div>
+    <div class="row-text">
+      <div class="row-name"><span class="date-pill">May 21</span> Kii-Tanabe &rarr; Takijiri-oji</div>
+      <div class="row-desc">Arrival day &bull; Collect Dual Pilgrim booklet &bull; Kumano Kodo trailhead</div>
+    </div>
+    <div class="row-arrow">&#8250;</div>
+  </a>
+
+  <a class="row hike" href="Japan%20Itinerary/Day1-Hike.html">
+    <div class="row-icon">&#129406;</div>
+    <div class="row-text">
+      <div class="row-name"><span class="date-pill">May 22</span> Day 1 &mdash; Takijiri-oji &rarr; Takahara</div>
+      <div class="row-desc">7 stops &bull; Rebirth cave &bull; Milk Rock &bull; 17:00 shuttle pickup</div>
+    </div>
+    <div class="row-arrow">&#8250;</div>
+  </a>
+
+  <a class="row hike" href="Japan%20Itinerary/Day2-Hike.html">
+    <div class="row-icon">&#129406;</div>
+    <div class="row-text">
+      <div class="row-name"><span class="date-pill">May 23</span> Day 2 &mdash; Takahara &rarr; Chikatsuyu</div>
+      <div class="row-desc">6 stops &bull; Hashiori-toge Pass &bull; Tea house viewpoint &bull; River shrine</div>
+    </div>
+    <div class="row-arrow">&#8250;</div>
+  </a>
+
+  <a class="row hike" href="Japan%20Itinerary/Day3-Hike.html">
+    <div class="row-icon">&#129406;</div>
+    <div class="row-text">
+      <div class="row-name"><span class="date-pill">May 24</span> Day 3 &mdash; Hosshinmon-oji &rarr; Hongu</div>
+      <div class="row-desc">Bus transfer + trail &bull; Stamp stops &bull; Kumano Hongu Taisha UNESCO shrine</div>
+    </div>
+    <div class="row-arrow">&#8250;</div>
+  </a>
+
+  <a class="row tour" href="Japan%20Itinerary/Day4-Tour.html">
+    <div class="row-icon">&#9961;</div>
+    <div class="row-text">
+      <div class="row-name"><span class="date-pill">May 25</span> Day 4 &mdash; Kumano Sanzan Loop</div>
+      <div class="row-desc">3 Grand Shrines &bull; Nachi Waterfall &bull; Kii-Katsuura check-in</div>
+    </div>
+    <div class="row-arrow">&#8250;</div>
+  </a>
+
+  <a class="row food" href="Japan%20Itinerary/Day5-Tuna.html">
+    <div class="row-icon">&#127843;</div>
+    <div class="row-text">
+      <div class="row-name"><span class="date-pill">May 26</span> Day 5 &mdash; Tuna Market &amp; Cave Onsen</div>
+      <div class="row-desc">Kii-Katsuura &bull; Morning tuna auction &bull; Boat to sea-cave hot spring</div>
+    </div>
+    <div class="row-arrow">&#8250;</div>
+  </a>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section korea">&#127472;&#127479; Korea &mdash; Seoul &nbsp;&bull;&nbsp; May&ndash;Jun 2026</div>
+
+  <a class="row transit" href="Korea%20Itinerary/Tennoji-Seoul.html">
+    <div class="row-icon">&#9992;</div>
+    <div class="row-text">
+      <div class="row-name"><span class="date-pill">May 27&ndash;28</span> Tennoji &rarr; Seoul</div>
+      <div class="row-desc">Transit &bull; Hotel Trusty Osaka Abeno &rarr; ICN &rarr; Hotel Cappuccino</div>
+    </div>
+    <div class="row-arrow">&#8250;</div>
+  </a>
+
+  <a class="row korea" href="Korea%20Itinerary/Seoul-28.html">
+    <div class="row-icon">&#127981;</div>
+    <div class="row-text">
+      <div class="row-name"><span class="date-pill">May 28</span> Seoul &mdash; Day 1</div>
+      <div class="row-desc">Gangnam &bull; Yeoksam-ro &bull; Hotel Cappuccino</div>
+    </div>
+    <div class="row-arrow">&#8250;</div>
+  </a>
+
+  <a class="row korea" href="Korea%20Itinerary/Seoul-29.html">
+    <div class="row-icon">&#127981;</div>
+    <div class="row-text">
+      <div class="row-name"><span class="date-pill">May 29</span> Seoul &mdash; Day 2</div>
+      <div class="row-desc">Myeongdong &rarr; Gyeongbokgung &rarr; Bukchon &rarr; Gwangjang</div>
+    </div>
+    <div class="row-arrow">&#8250;</div>
+  </a>
+
+  <a class="row korea" href="Korea%20Itinerary/Seoul-30.html">
+    <div class="row-icon">&#127981;</div>
+    <div class="row-text">
+      <div class="row-name"><span class="date-pill">May 30</span> Seoul &mdash; Day 3</div>
+      <div class="row-desc">Changdeokgung &rarr; Huwon (Secret Garden) &rarr; Ikseon-dong &rarr; Seocho</div>
+    </div>
+    <div class="row-arrow">&#8250;</div>
+  </a>
+
+  <a class="row korea" href="Korea%20Itinerary/Seoul-31.html">
+    <div class="row-icon">&#127981;</div>
+    <div class="row-text">
+      <div class="row-name"><span class="date-pill">May 31</span> Seoul &mdash; Day 4</div>
+      <div class="row-desc">Gangnam &bull; COEX &rarr; Seongsu-dong &rarr; Seoul Forest</div>
+    </div>
+    <div class="row-arrow">&#8250;</div>
+  </a>
+
+  <a class="row korea" href="Korea%20Itinerary/Seoul-1.html">
+    <div class="row-icon">&#127981;</div>
+    <div class="row-text">
+      <div class="row-name"><span class="date-pill">Jun 1</span> Seoul &mdash; Day 5</div>
+      <div class="row-desc">Mangwon Market &rarr; Mangridan-gil &rarr; Han River &rarr; Battleship Park</div>
+    </div>
+    <div class="row-arrow">&#8250;</div>
+  </a>
+
+  <a class="row korea" href="Korea%20Itinerary/Seoul-2.html">
+    <div class="row-icon">&#127981;</div>
+    <div class="row-text">
+      <div class="row-name"><span class="date-pill">Jun 2</span> Seoul &mdash; Day 6</div>
+      <div class="row-desc">Hannam-dong &rarr; Itaewon &rarr; Yeonnam-dong &rarr; Hongdae</div>
+    </div>
+    <div class="row-arrow">&#8250;</div>
+  </a>
+
+  <a class="row depart" href="Korea%20Itinerary/Seoul-SFO.html">
+    <div class="row-icon">&#9992;</div>
+    <div class="row-text">
+      <div class="row-name"><span class="date-pill">Jun 3</span> Seoul &rarr; SFO</div>
+      <div class="row-desc">Departure &bull; Hotel Cappuccino check-out &rarr; ICN T1 &rarr; SFO</div>
+    </div>
+    <div class="row-arrow">&#8250;</div>
+  </a>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section test">&#129514; GPS Test &mdash; Palo Alto</div>
+
+  <a class="row test" href="Japan%20Itinerary/TEST-PaloAlto.html">
+    <div class="row-icon">&#128205;</div>
+    <div class="row-text">
+      <div class="row-name">TEST MAP &mdash; Palo Alto</div>
+      <div class="row-desc">Verify GPS tracking &bull; Offline tile cache &bull; Organic Maps links &bull; Run before Japan</div>
+    </div>
+    <div class="row-arrow">&#8250;</div>
+  </a>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seoul &mdash; Sunday, May 31</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px; color: #222; background: #eef2f7; padding: 16px;
+    }
+    .page { max-width: 720px; margin: 0 auto; }
+
+    .doc-header {
+      background: #1a3a5c; color: #fff;
+      border-radius: 10px 10px 0 0; padding: 18px 22px 16px;
+    }
+    .doc-header h1 { font-size: 1.25em; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 5px; }
+    .doc-header .meta { font-size: 0.82em; opacity: 0.82; line-height: 1.5; }
+
+    .section-divider {
+      background: #2a5a8c; color: #fff;
+      font-size: 0.78em; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; padding: 6px 22px;
+    }
+
+    .card {
+      background: #fff; border-left: 4px solid #ccc;
+      padding: 16px 18px 14px; border-bottom: 1px solid #e0e0e0;
+    }
+    .card:last-child { border-radius: 0 0 10px 10px; border-bottom: none; }
+    .card.walk    { border-left-color: #4a7a3a; background: #f0f5ee; }
+    .card.tour    { border-left-color: #1a6a7a; background: #e8f5f8; }
+    .card.checkin { border-left-color: #5a2a7a; background: #f4f0fb; }
+    .card.train   { border-left-color: #2a4a6a; background: #f0f4f8; }
+    .card.food    { border-left-color: #8a5a1a; background: #fdf6ee; }
+    .card.opt     { border-left: 4px dashed #1a6a7a; background: #e8f5f8; opacity: 0.92; }
+
+    .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+    .card-title { font-size: 1.0em; font-weight: 700; color: #111; flex: 1; min-width: 0; }
+    .card-title small { display: block; font-weight: 400; font-size: 0.82em; color: #555; margin-top: 2px; }
+
+    .badge {
+      display: inline-block; font-size: 0.68em; font-weight: 700;
+      padding: 3px 8px; border-radius: 4px; text-transform: uppercase;
+      letter-spacing: 0.6px; white-space: nowrap; flex-shrink: 0;
+    }
+    .badge-walk    { background: #d4e8c8; color: #1a3a1a; }
+    .badge-tour    { background: #c8eaf0; color: #0a3a4a; }
+    .badge-checkin { background: #e0d4f0; color: #3a1a5a; }
+    .badge-train   { background: #d0dcea; color: #0a2a4a; }
+    .badge-food    { background: #f0dfc0; color: #4a2a00; }
+    .badge-free    { background: #e8e8d8; color: #2a2a1a; }
+
+    .details { font-size: 0.88em; line-height: 1.6; color: #333; }
+    .details p { margin-bottom: 6px; }
+    .details p:last-child { margin-bottom: 0; }
+    .details ul { margin: 4px 0 6px 18px; }
+    .details ul li { margin-bottom: 3px; }
+
+    .timing-note {
+      background: #e8f5e8; border-left: 4px solid #3a7a3a;
+      border-radius: 0 5px 5px 0; padding: 10px 14px; margin-bottom: 14px;
+      font-size: 0.87em; color: #1a3a1a; line-height: 1.55;
+    }
+    .timing-note strong { color: #1a4a1a; }
+    .timing-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .timing-pill {
+      background: #fff; border: 1px solid #3a7a3a; border-radius: 4px;
+      padding: 4px 10px; font-size: 0.85em; font-weight: 600;
+      color: #1a4a1a; white-space: nowrap;
+    }
+    .timing-pill.warn { border-color: #c0392b; color: #c0392b; }
+
+    .callout-warn {
+      background: #fff3cd; border-left: 4px solid #e0a000;
+      border-radius: 0 5px 5px 0; padding: 9px 12px; margin: 0 0 12px;
+      font-size: 0.87em; color: #5a3c00; line-height: 1.55;
+    }
+    .callout-warn strong { display: block; margin-bottom: 2px; color: #3a2800; }
+    .callout-warn.danger { background: #fff0f0; border-left-color: #c0392b; color: #7a0000; }
+    .callout-warn.danger strong { color: #c0392b; }
+    .callout-info {
+      background: #edf4ff; border: 1px solid #bcd4f0;
+      border-radius: 5px; padding: 8px 12px; margin: 0 0 12px;
+      font-size: 0.85em; color: #1a3a5c; line-height: 1.55;
+    }
+    .callout-tip {
+      background: #fffbe8; border-left: 4px solid #c8a000;
+      border-radius: 0 5px 5px 0; padding: 9px 12px; margin: 0 0 12px;
+      font-size: 0.87em; color: #4a3800; line-height: 1.55;
+    }
+
+    .nav-box {
+      background: #f0f4f8; border: 1px solid #b0c4d8;
+      border-left: 4px solid #2a5a8c; border-radius: 0 6px 6px 0;
+      padding: 10px 14px; margin-bottom: 14px;
+      font-size: 0.86em; color: #1a2a3a; line-height: 1.6;
+    }
+    .nav-box strong { color: #1a3a5c; }
+    .nav-box .nav-title { font-weight: 700; font-size: 1.0em; color: #1a3a5c; display: block; margin-bottom: 6px; }
+    .nav-box ul { margin: 6px 0 0 18px; padding: 0; }
+    .nav-box ul li { margin-bottom: 4px; }
+
+    .detail-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.87em; }
+    .detail-table tr { border-bottom: 1px solid #e0e8f0; }
+    .detail-table tr:last-child { border-bottom: none; }
+    .detail-table td { padding: 6px 4px; line-height: 1.5; color: #333; vertical-align: top; }
+    .detail-table td:first-child { font-weight: 700; color: #1a3a5c; width: 38%; padding-right: 12px; white-space: nowrap; }
+
+    .warn { color: #b33; font-weight: 600; }
+    .doc-footer { text-align: center; font-size: 0.75em; color: #999; padding: 14px 0 4px; }
+
+    /* Naver Maps tap links */
+    a.nmap-link {
+      color: #1a3a5c; font-weight: 600; text-decoration: none;
+      border-bottom: 1px dotted #2a5a8c;
+    }
+    a.nmap-link:hover { color: #2a6a9c; }
+
+    @media print {
+      @page { size: letter portrait; margin: 0.35in; }
+      body { background: #fff !important; padding: 0; font-size: 13px; color: #000 !important; }
+      .page { max-width: 100%; }
+      .doc-header { background: #fff !important; color: #000 !important; border: 2px solid #000; border-bottom: none; border-radius: 0; padding: 12px 16px; }
+      .doc-header h1 { color: #000 !important; font-size: 1.3em; }
+      .doc-header .meta { color: #000 !important; opacity: 1; }
+      .section-divider { background: #fff !important; color: #000 !important; border-top: 2px solid #000; border-left: 2px solid #000; border-right: 2px solid #000; border-bottom: 1px solid #555; padding: 5px 16px; font-size: 0.82em; }
+      .card { background: #fff !important; border: 2px solid #000 !important; border-top: none !important; border-left: 2px solid #000 !important; border-radius: 0 !important; padding: 11px 14px; }
+      .card + .card { border-top: 1px solid #555 !important; }
+      .card:last-child { border-bottom: 2px solid #000 !important; }
+      .card.walk, .card.tour, .card.checkin, .card.train, .card.food, .card.opt { background: #fff !important; }
+      .badge-walk, .badge-tour, .badge-checkin, .badge-train, .badge-food, .badge-free { background: #fff !important; color: #000 !important; border: 1px solid #000; }
+      .details { color: #000 !important; }
+      .warn { color: #000 !important; }
+      .timing-note { background: #fff !important; color: #000 !important; border: 2px solid #000 !important; border-left-width: 4px !important; border-radius: 0 !important; }
+      .timing-note strong { color: #000 !important; }
+      .timing-pill { background: #fff !important; color: #000 !important; border: 1px solid #000 !important; border-radius: 0 !important; }
+      .timing-pill.warn { color: #000 !important; border-color: #000 !important; }
+      .nav-box { background: #fff !important; color: #000 !important; border: 2px solid #000 !important; border-left-width: 4px !important; border-radius: 0 !important; }
+      .nav-box strong, .nav-box .nav-title { color: #000 !important; }
+      .callout-warn, .callout-warn.danger { background: #fff !important; color: #000 !important; border: 2px solid #000 !important; border-left-width: 4px !important; border-radius: 0 !important; }
+      .callout-warn strong, .callout-warn.danger strong { color: #000 !important; }
+      .callout-info { background: #fff !important; color: #000 !important; border: 1.5px solid #000 !important; border-radius: 0 !important; }
+      .callout-tip { background: #fff !important; color: #000 !important; border: 2px solid #000 !important; border-left-width: 4px !important; border-radius: 0 !important; }
+      .detail-table td { color: #000 !important; }
+      .detail-table td:first-child { color: #000 !important; }
+      .doc-footer { color: #000 !important; }
+    }
+
+    @media screen and (max-width: 600px) {
+      body { padding: 0; font-size: 14px; background: #eef2f7; }
+      .page { max-width: 100%; }
+      .doc-header { border-radius: 0; padding: 16px 16px 14px; }
+      .doc-header h1 { font-size: 1.1em; }
+      .section-divider { padding: 6px 16px; font-size: 0.75em; }
+      .card { padding: 14px 14px 12px; }
+      .card:last-child { border-radius: 0; }
+      .card-title { font-size: 1.05em; }
+      .timing-note { font-size: 0.92em; padding: 10px 12px; }
+      .timing-row { gap: 6px; }
+      .timing-pill { font-size: 0.88em; padding: 5px 10px; }
+      .nav-box { font-size: 0.9em; padding: 10px 12px; }
+      .callout-warn { font-size: 0.92em; padding: 10px 12px; }
+      .callout-info { font-size: 0.9em; }
+      .detail-table { font-size: 0.84em; }
+      .doc-footer { padding: 16px 16px 24px; }
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+<div class="page">
+
+  <div class="doc-header">
+    <h1>Seoul &mdash; Sunday, May 31</h1>
+    <div class="meta">Day 4 of 6 &nbsp;&bull;&nbsp; Gangnam / COEX &rarr; Seongsu-dong &rarr; Seoul Forest &rarr; Gangnam &nbsp;&bull;&nbsp; Hotel Cappuccino</div>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-divider">Locations &mdash; Tap to Open in Naver Maps</div>
+  <div class="card checkin">
+    <div class="card-header">
+      <span class="badge badge-checkin">Naver Maps</span>
+      <div class="card-title">
+        Sunday Stops &mdash; Walking Directions
+        <small>Tap any name to open Naver Maps with destination set &mdash; works from any starting point</small>
+      </div>
+    </div>
+    <table class="detail-table">
+      <tr><td>1 &mdash; Hotel Cappuccino</td>
+        <td><a class="nmap-link" href="nmap://route/walk?dlat=37.5075&amp;dlng=127.0407&amp;dname=호텔카푸치노&amp;appname=com.travel.itinerary">호텔카푸치노</a> &mdash; home base, Gangnam-gu</td></tr>
+      <tr><td>2 &mdash; COEX / Starfield Library</td>
+        <td><a class="nmap-link" href="nmap://route/walk?dlat=37.5132&amp;dlng=127.0588&amp;dname=별마당 도서관&amp;appname=com.travel.itinerary">별마당 도서관</a> &mdash; Starfield Library, COEX Mall</td></tr>
+      <tr><td>3 &mdash; Gentle Monster Seongsu</td>
+        <td><a class="nmap-link" href="nmap://route/walk?dlat=37.5451&amp;dlng=127.0553&amp;dname=젠틀몬스터 성수&amp;appname=com.travel.itinerary">젠틀몬스터 성수</a> &mdash; flagship store, Seongsu-dong</td></tr>
+      <tr><td>4 &mdash; Cafe Onion Seongsu</td>
+        <td><a class="nmap-link" href="nmap://route/walk?dlat=37.5467&amp;dlng=127.0553&amp;dname=카페 어니언 성수&amp;appname=com.travel.itinerary">카페 어니언 성수</a> &mdash; industrial-chic bakery cafe</td></tr>
+      <tr><td>5 &mdash; Seoul Forest</td>
+        <td><a class="nmap-link" href="nmap://route/walk?dlat=37.5446&amp;dlng=127.0399&amp;dname=서울숲&amp;appname=com.travel.itinerary">서울숲</a> &mdash; park &amp; sunset walk, Seongdong-gu</td></tr>
+      <tr><td>6 &mdash; Geumdwaeji Sikdang</td>
+        <td><a class="nmap-link" href="nmap://route/walk?dlat=37.5085&amp;dlng=127.0323&amp;dname=금돼지식당&amp;appname=com.travel.itinerary">금돼지식당</a> &mdash; samgyeopsal dinner, Gangnam-gu</td></tr>
+    </table>
+    <div id="day31-map" style="width:100%; height:280px; border-radius:5px; margin:12px 0 6px; z-index:0;"></div>
+    <p style="font-size:0.75em; color:#555; text-align:center; margin:0 0 4px;">Tap a pin for details &nbsp;&bull;&nbsp; Pinch to zoom &nbsp;&bull;&nbsp; © OpenStreetMap contributors</p>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      (function() {
+        function makePin(n, c) {
+          return L.divIcon({ className: '', html: '<div style="width:28px;height:28px;border-radius:50%;background:' + c + ';color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,0,0,0.18);box-shadow:0 2px 5px rgba(0,0,0,0.35);">' + n + '</div>', iconSize: [28,28], iconAnchor: [14,14], popupAnchor: [0,-16] });
+        }
+        var map = L.map('day31-map', { scrollWheelZoom: false });
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', { attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>', maxZoom: 19 }).addTo(map);
+        var pins = [
+          { lat: 37.5075, lng: 127.0407, color: '#5a2a7a', label: '<strong>① Hotel Cappuccino</strong><br>호텔카푸치노 &mdash; Gangnam' },
+          { lat: 37.5132, lng: 127.0588, color: '#1a6a7a', label: '<strong>② COEX / Starfield Library</strong><br>별마당 도서관 &mdash; COEX mall' },
+          { lat: 37.5451, lng: 127.0553, color: '#4a7a3a', label: '<strong>③ Gentle Monster Seongsu</strong><br>젠틀몬스터 성수 &mdash; flagship store' },
+          { lat: 37.5467, lng: 127.0553, color: '#8a5a1a', label: '<strong>④ Cafe Onion Seongsu</strong><br>카페 어니언 성수 &mdash; industrial-chic bakery' },
+          { lat: 37.5446, lng: 127.0399, color: '#4a7a3a', label: '<strong>⑤ Seoul Forest</strong><br>서울숲 &mdash; park &amp; sunset walk' },
+          { lat: 37.5085, lng: 127.0323, color: '#8a5a1a', label: '<strong>⑥ Geumdwaeji Sikdang</strong><br>금돼지식당 &mdash; samgyeopsal dinner' }
+        ];
+        var ll = [];
+        pins.forEach(function(p, i) {
+          L.marker([p.lat, p.lng], { icon: makePin(i+1, p.color) }).addTo(map).bindPopup(p.label);
+          ll.push([p.lat, p.lng]);
+        });
+        map.fitBounds(L.latLngBounds(ll), { padding: [32,32] });
+      })();
+    </script>
+  </div>
+
+  <div class="section-divider">Morning &mdash; COEX &amp; Seongsu</div>
+
+  <!-- Starfield Library & COEX -->
+  <div class="card tour">
+    <div class="card-header">
+      <span class="badge badge-tour">Explore</span>
+      <div class="card-title">
+        Starfield Library &amp; COEX Mall
+        <small>Gangnam / COEX &nbsp;&bull;&nbsp; 10:00 AM &nbsp;&bull;&nbsp; Walk ~10&ndash;15 min from hotel</small>
+      </div>
+    </div>
+    <div class="details">
+      <p><strong>Starfield Library:</strong> A soaring three-storey open bookshelf covering an entire atrium wall, with reading chairs at floor level. Free entry; no ticket required. Browse freely and photograph in morning light.</p>
+      <p><strong>COEX Mall:</strong> One of Asia&rsquo;s largest underground malls &mdash; explore at a relaxed pace: aquarium atrium, K-pop merchandise stores, and lifestyle shops.</p>
+    </div>
+    <table class="detail-table">
+      <tr><td>Admission</td><td>Free</td></tr>
+      <tr><td>Depart by</td><td><strong>11:30 AM</strong> for Samsung Station (Line 2)</td></tr>
+    </table>
+  </div>
+
+  <!-- Transfer: COEX → Seongsu -->
+  <div class="card walk">
+    <div class="card-header">
+      <span class="badge badge-walk">Transfer</span>
+      <div class="card-title">
+        COEX &rarr; Seongsu (Subway Line 2)
+        <small>Gangnam &rarr; Seongdong-gu &nbsp;&bull;&nbsp; Depart 11:30 AM</small>
+      </div>
+    </div>
+    <div class="details">
+      <p>Walk ~8 min from COEX Mall to <strong>Samsung Station</strong> (Line 2, follow underground mall corridor signs) &rarr; board Line 2 eastbound &rarr; ride 3 stops to <strong>Seongsu Station</strong> (~10 min) &rarr; Exit 3, walk ~8 min south down Yeonmujang-gil into the caf&eacute; district.</p>
+      <p>All Seongsu activities (Gentle Monster, Salt Bread, Cafe Onion, Rain Report Croissant, Seoul Forest) are walkable from this exit &mdash; no further transit needed until the 4:15 PM taxi to dinner.</p>
+    </div>
+    <table class="detail-table">
+      <tr><td>Cost (2p, subway)</td><td>~&#8361;2,800</td></tr>
+      <tr><td>Arrive Seongsu</td><td>~12:00 PM (door-to-door ~25&ndash;30 min)</td></tr>
+    </table>
+  </div>
+
+  <!-- Gentle Monster -->
+  <div class="card tour">
+    <div class="card-header">
+      <span class="badge badge-tour">Gallery</span>
+      <div class="card-title">
+        Gentle Monster &mdash; Haus Nowhere Seoul
+        <small>433 Ttukseom-ro, 2F, Seongsu &nbsp;&bull;&nbsp; 12:00 PM &nbsp;&bull;&nbsp; Allow ~45&ndash;60 min</small>
+      </div>
+    </div>
+    <div class="details">
+      <p>Immersive art &amp; retail experience blending futuristic sculpture installations with the brand&rsquo;s eyewear collections. Each room is a full set-design environment &mdash; more art gallery than shop. Free entry; no ticket required.</p>
+      <p><em>Walk ~5 min south to Jayeondo Sogeumppang for the 1:00 PM salt bread stop.</em></p>
+    </div>
+    <table class="detail-table">
+      <tr><td>Admission</td><td>Free</td></tr>
+    </table>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-divider">Afternoon &mdash; Seongsu Cafes &amp; Seoul Forest</div>
+
+  <!-- Lunch & Cafes: Seongsu -->
+  <div class="card food">
+    <div class="card-header">
+      <span class="badge badge-food">Lunch &amp; Cafes</span>
+      <div class="card-title">
+        Seongsu Lunch &amp; Caf&eacute; Stops
+        <small>Seongsu-dong &nbsp;&bull;&nbsp; 1:00 PM &nbsp;&bull;&nbsp; Allow ~90 min, all walkable</small>
+      </div>
+    </div>
+    <div class="details">
+      <p><strong>Jayeondo Sogeumppang</strong> (자연도 소금빵) &mdash; 56-1 Yeonmujang-gil. Buttery, flaky artisan salt bread; one of Seoul&rsquo;s most talked-about bakeries. Grab a few to eat while walking.</p>
+      <p><strong>Cafe Onion</strong> &mdash; Abandoned cement factory converted into a multi-level bakery: raw concrete walls, rusted staircases, and a rooftop terrace. Order a pastry and explore all floors.</p>
+      <p><strong>Rain Report Croissant</strong> &mdash; Windows simulate rainfall every 15 min. Arrive between cycles to grab a table with a view. <em>Check Instagram / Naver for current reservation method before departure (book March&ndash;April).</em></p>
+    </div>
+    <table class="detail-table">
+      <tr><td>Est. Cost (2p)</td><td>~&#8361;30,000&ndash;&#8361;50,000</td></tr>
+      <tr><td>Payment</td><td>Card accepted at trendy venues</td></tr>
+      <tr><td>Depart by</td><td><strong>2:30 PM</strong> &mdash; walk ~10 min north to Seoul Forest</td></tr>
+    </table>
+  </div>
+
+  <!-- Seoul Forest -->
+  <div class="card tour">
+    <div class="card-header">
+      <span class="badge badge-tour">Park</span>
+      <div class="card-title">
+        Seoul Forest (서울숲)
+        <small>Seongdong-gu &nbsp;&bull;&nbsp; 2:30 PM &nbsp;&bull;&nbsp; Allow ~1 hr 45 min</small>
+      </div>
+    </div>
+    <div class="details">
+      <p>Walk ~10 min north from the Seongsu caf&eacute; strip to the park&rsquo;s south entrance. A large, peaceful green space ideal for a gentle stroll after a full morning.</p>
+      <p><strong>Deer Garden:</strong> A small enclosure near the entrance where you can observe fallow deer up close &mdash; unexpectedly charming in the middle of a city.</p>
+      <p><strong>Ttukseom Hangang Park:</strong> The forest connects to the Han River riverfront &mdash; walk to the water&rsquo;s edge for a view of the river and the Seongsu Bridge.</p>
+    </div>
+    <table class="detail-table">
+      <tr><td>Admission</td><td>Free</td></tr>
+      <tr><td>Leave by</td><td><strong>4:15 PM</strong> &mdash; taxi to Geumdwaeji Sikdang (~20&ndash;25 min)</td></tr>
+    </table>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-divider">Evening &mdash; Dinner in Gangnam</div>
+
+  <!-- Dinner: Geumdwaeji Sikdang -->
+  <div class="card food">
+    <div class="card-header">
+      <span class="badge badge-food">Dinner</span>
+      <div class="card-title">
+        Geumdwaeji Sikdang (금돼지식당) &mdash; Michelin Bib Gourmand
+        <small>Gangnam &nbsp;&bull;&nbsp; Arrive 4:45 PM &nbsp;&bull;&nbsp; Walk-in only, no reservations</small>
+      </div>
+    </div>
+    <div class="callout-warn">
+      <strong>&#9888; Arrive by 4:45 PM</strong>
+      Queue before the ~5:00 PM dinner opening. Arriving later risks a 60&ndash;90 min wait or being turned away on a Sunday.
+    </div>
+    <div class="details">
+      <p>Famous for thick-cut, bone-in pork belly (Gold Pig) &mdash; Michelin Bib Gourmand. Short walk back to Hotel Cappuccino (~5&ndash;10 min) after dinner.</p>
+    </div>
+    <table class="detail-table">
+      <tr><td>Est. Cost (2p)</td><td>~&#8361;100,000&ndash;&#8361;140,000</td></tr>
+      <tr><td>Per person</td><td>~&#8361;50,000&ndash;&#8361;70,000</td></tr>
+      <tr><td>Payment</td><td>Cash preferred</td></tr>
+    </table>
+  </div>
+
+  <div class="doc-footer">Seoul &mdash; May 28&ndash;Jun 3, 2026 &nbsp;|&nbsp; Hotel Cappuccino, Gangnam</div>
+</div>
+</body>
+</html>

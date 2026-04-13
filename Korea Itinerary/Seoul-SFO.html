@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seoul to SFO Logistics &mdash; Wednesday, June 3</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px; color: #222; background: #eef2f7; padding: 16px;
+    }
+    .page { max-width: 720px; margin: 0 auto; }
+
+    .doc-header {
+      background: #1a3a5c; color: #fff;
+      border-radius: 10px 10px 0 0; padding: 18px 22px 16px;
+    }
+    .doc-header h1 { font-size: 1.25em; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 5px; }
+    .doc-header .meta { font-size: 0.82em; opacity: 0.82; line-height: 1.5; }
+
+    .section-divider {
+      background: #2a5a8c; color: #fff;
+      font-size: 0.78em; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; padding: 6px 22px;
+    }
+
+    .card {
+      background: #fff; border-left: 4px solid #ccc;
+      padding: 16px 18px 14px; border-bottom: 1px solid #e0e0e0;
+    }
+    .card:last-child { border-radius: 0 0 10px 10px; border-bottom: none; }
+    .card.walk    { border-left-color: #4a7a3a; background: #f0f5ee; }
+    .card.tour    { border-left-color: #1a6a7a; background: #e8f5f8; }
+    .card.checkin { border-left-color: #5a2a7a; background: #f4f0fb; }
+    .card.train   { border-left-color: #2a4a6a; background: #f0f4f8; }
+    .card.food    { border-left-color: #8a5a1a; background: #fdf6ee; }
+    .card.flight  { border-left-color: #1a4a7a; background: #d6e8f7; }
+
+    .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+    .card-title { font-size: 1.0em; font-weight: 700; color: #111; flex: 1; min-width: 0; }
+    .card-title small { display: block; font-weight: 400; font-size: 0.82em; color: #555; margin-top: 2px; }
+
+    .badge {
+      display: inline-block; font-size: 0.68em; font-weight: 700;
+      padding: 3px 8px; border-radius: 4px; text-transform: uppercase;
+      letter-spacing: 0.6px; white-space: nowrap; flex-shrink: 0;
+    }
+    .badge-walk    { background: #d4e8c8; color: #1a3a1a; }
+    .badge-tour    { background: #c8eaf0; color: #0a3a4a; }
+    .badge-checkin { background: #e0d4f0; color: #3a1a5a; }
+    .badge-train   { background: #d0dcea; color: #0a2a4a; }
+    .badge-food    { background: #f0dfc0; color: #4a2a00; }
+    .badge-free    { background: #e8e8d8; color: #2a2a1a; }
+    .badge-flight  { background: #c5daf0; color: #1a4a7a; }
+
+    .details { font-size: 0.88em; line-height: 1.6; color: #333; }
+    .details p { margin-bottom: 6px; }
+    .details p:last-child { margin-bottom: 0; }
+    .details ul { margin: 4px 0 6px 18px; }
+    .details ul li { margin-bottom: 3px; }
+
+    .timing-note {
+      background: #e8f5e8; border-left: 4px solid #3a7a3a;
+      border-radius: 0 5px 5px 0; padding: 10px 14px; margin-bottom: 14px;
+      font-size: 0.87em; color: #1a3a1a; line-height: 1.55;
+    }
+    .timing-note strong { color: #1a4a1a; }
+    .timing-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .timing-pill {
+      background: #fff; border: 1px solid #3a7a3a; border-radius: 4px;
+      padding: 4px 10px; font-size: 0.85em; font-weight: 600;
+      color: #1a4a1a; white-space: nowrap;
+    }
+    .timing-pill.warn { border-color: #c0392b; color: #c0392b; }
+
+    .callout-warn {
+      background: #fff3cd; border-left: 4px solid #e0a000;
+      border-radius: 0 5px 5px 0; padding: 9px 12px; margin: 0 0 12px;
+      font-size: 0.87em; color: #5a3c00; line-height: 1.55;
+    }
+    .callout-warn strong { display: block; margin-bottom: 2px; color: #3a2800; }
+    .callout-warn.danger { background: #fff0f0; border-left-color: #c0392b; color: #7a0000; }
+    .callout-warn.danger strong { color: #c0392b; }
+    .callout-info {
+      background: #edf4ff; border: 1px solid #bcd4f0;
+      border-radius: 5px; padding: 8px 12px; margin: 0 0 12px;
+      font-size: 0.85em; color: #1a3a5c; line-height: 1.55;
+    }
+    .callout-tip {
+      background: #fffbe8; border-left: 4px solid #c8a000;
+      border-radius: 0 5px 5px 0; padding: 9px 12px; margin: 0 0 12px;
+      font-size: 0.87em; color: #4a3800; line-height: 1.55;
+    }
+
+    .detail-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.87em; }
+    .detail-table tr { border-bottom: 1px solid #e0e8f0; }
+    .detail-table tr:last-child { border-bottom: none; }
+    .detail-table td { padding: 6px 4px; line-height: 1.5; color: #333; vertical-align: top; }
+    .detail-table td:first-child { font-weight: 700; color: #1a3a5c; width: 38%; padding-right: 12px; white-space: nowrap; }
+
+    /* Timeline table inside card */
+    .timeline-table { width: 100%; border-collapse: collapse; margin: 0; font-size: 0.87em; }
+    .timeline-table tr { border-bottom: 1px solid #dce8f0; }
+    .timeline-table tr:last-child { border-bottom: none; }
+    .timeline-table td { padding: 7px 4px; line-height: 1.5; color: #333; vertical-align: top; }
+    .timeline-table td:first-child { font-weight: 700; color: #1a3a5c; white-space: nowrap; padding-right: 16px; width: 90px; }
+
+    .conf-strip {
+      margin-top: 10px; padding-top: 8px;
+      border-top: 1px dashed #ccc;
+      font-size: 0.78em; color: #666; font-style: italic; line-height: 1.5;
+    }
+
+    .warn { color: #b33; font-weight: 600; }
+    .doc-footer { text-align: center; font-size: 0.75em; color: #999; padding: 14px 0 4px; }
+
+    /* Naver Maps tap links */
+    a.nmap-link {
+      color: #1a3a5c; font-weight: 600; text-decoration: none;
+      border-bottom: 1px dotted #2a5a8c;
+    }
+    a.nmap-link:hover { color: #2a6a9c; }
+
+    @media print {
+      @page { size: letter portrait; margin: 0.35in; }
+      body { background: #fff !important; padding: 0; font-size: 13px; color: #000 !important; }
+      .page { max-width: 100%; }
+      .doc-header { background: #fff !important; color: #000 !important; border: 2px solid #000; border-bottom: none; border-radius: 0; padding: 12px 16px; }
+      .doc-header h1 { color: #000 !important; font-size: 1.3em; }
+      .doc-header .meta { color: #000 !important; opacity: 1; }
+      .section-divider { background: #fff !important; color: #000 !important; border-top: 2px solid #000; border-left: 2px solid #000; border-right: 2px solid #000; border-bottom: 1px solid #555; padding: 5px 16px; font-size: 0.82em; }
+      .card { background: #fff !important; border: 2px solid #000 !important; border-top: none !important; border-left: 2px solid #000 !important; border-radius: 0 !important; padding: 11px 14px; }
+      .card + .card { border-top: 1px solid #555 !important; }
+      .card:last-child { border-bottom: 2px solid #000 !important; }
+      .card.walk, .card.tour, .card.checkin, .card.train, .card.food, .card.flight { background: #fff !important; }
+      .badge-walk, .badge-tour, .badge-checkin, .badge-train, .badge-food, .badge-free, .badge-flight { background: #fff !important; color: #000 !important; border: 1px solid #000; }
+      .details { color: #000 !important; }
+      .warn { color: #000 !important; }
+      .timing-note { background: #fff !important; color: #000 !important; border: 2px solid #000 !important; border-left-width: 4px !important; border-radius: 0 !important; }
+      .timing-note strong { color: #000 !important; }
+      .timing-pill { background: #fff !important; color: #000 !important; border: 1px solid #000 !important; border-radius: 0 !important; }
+      .timing-pill.warn { color: #000 !important; border-color: #000 !important; }
+      .callout-warn, .callout-warn.danger { background: #fff !important; color: #000 !important; border: 2px solid #000 !important; border-left-width: 4px !important; border-radius: 0 !important; }
+      .callout-warn strong, .callout-warn.danger strong { color: #000 !important; }
+      .callout-info { background: #fff !important; color: #000 !important; border: 1.5px solid #000 !important; border-radius: 0 !important; }
+      .callout-tip { background: #fff !important; color: #000 !important; border: 2px solid #000 !important; border-left-width: 4px !important; border-radius: 0 !important; }
+      .detail-table td { color: #000 !important; }
+      .detail-table td:first-child { color: #000 !important; }
+      .timeline-table td { color: #000 !important; }
+      .timeline-table td:first-child { color: #000 !important; }
+      .conf-strip { color: #000 !important; font-style: normal; font-weight: 600; border-top: 1px dashed #000; }
+      .doc-footer { color: #000 !important; }
+    }
+
+    @media screen and (max-width: 600px) {
+      body { padding: 0; font-size: 14px; background: #eef2f7; }
+      .page { max-width: 100%; }
+      .doc-header { border-radius: 0; padding: 16px 16px 14px; }
+      .doc-header h1 { font-size: 1.1em; }
+      .section-divider { padding: 6px 16px; font-size: 0.75em; }
+      .card { padding: 14px 14px 12px; }
+      .card:last-child { border-radius: 0; }
+      .card-title { font-size: 1.05em; }
+      .timing-note { font-size: 0.92em; padding: 10px 12px; }
+      .timing-row { gap: 6px; }
+      .timing-pill { font-size: 0.88em; padding: 5px 10px; }
+      .callout-warn { font-size: 0.92em; padding: 10px 12px; }
+      .callout-info { font-size: 0.9em; }
+      .detail-table { font-size: 0.84em; }
+      .timeline-table { font-size: 0.84em; }
+      .doc-footer { padding: 16px 16px 24px; }
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+<div class="page">
+
+  <div class="doc-header">
+    <h1>Seoul to SFO Logistics</h1>
+    <div class="meta">Wednesday, June 3, 2026 &nbsp;&bull;&nbsp; Hotel Cappuccino Check-Out &rarr; ICN T1 &rarr; SFO &nbsp;&bull;&nbsp; Air Premia YP111</div>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-divider">Locations &mdash; Tap to Open in Naver Maps</div>
+  <div class="card checkin">
+    <div class="card-header">
+      <span class="badge badge-checkin">Naver Maps</span>
+      <div class="card-title">
+        Departure Day Stops &mdash; Walking Directions
+        <small>Tap any name to open Naver Maps with destination set &mdash; works from any starting point</small>
+      </div>
+    </div>
+    <table class="detail-table">
+      <tr><td>1 &mdash; Hotel Cappuccino</td>
+        <td><a class="nmap-link" href="nmap://route/walk?dlat=37.5075&amp;dlng=127.0407&amp;dname=호텔카푸치노&amp;appname=com.travel.itinerary">호텔카푸치노</a> &mdash; checkout &amp; bag pickup</td></tr>
+      <tr><td>2 &mdash; Bus 6703 Stop (언주역)</td>
+        <td><a class="nmap-link" href="nmap://route/walk?dlat=37.5065&amp;dlng=127.0385&amp;dname=언주역 호텔삼정&amp;appname=com.travel.itinerary">언주역 (호텔삼정)</a> &mdash; K-Limousine 6703 bus stop</td></tr>
+      <tr><td>3 &mdash; ICN Terminal 1</td>
+        <td><a class="nmap-link" href="nmap://route/walk?dlat=37.4490&amp;dlng=126.4510&amp;dname=인천공항 제1터미널&amp;appname=com.travel.itinerary">인천공항 제1터미널</a> &mdash; Air Premia YP111 departure</td></tr>
+    </table>
+    <div id="sfo-day-map" style="width:100%; height:280px; border-radius:5px; margin:12px 0 6px; z-index:0;"></div>
+    <p style="font-size:0.75em; color:#555; text-align:center; margin:0 0 4px;">Tap a pin for details &nbsp;&bull;&nbsp; Pinch to zoom &nbsp;&bull;&nbsp; © OpenStreetMap contributors</p>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      (function() {
+        function makePin(n, c) {
+          return L.divIcon({ className: '', html: '<div style="width:28px;height:28px;border-radius:50%;background:' + c + ';color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,0,0,0.18);box-shadow:0 2px 5px rgba(0,0,0,0.35);">' + n + '</div>', iconSize: [28,28], iconAnchor: [14,14], popupAnchor: [0,-16] });
+        }
+        var map = L.map('sfo-day-map', { scrollWheelZoom: false });
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', { attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>', maxZoom: 19 }).addTo(map);
+        var pins = [
+          { lat: 37.5075, lng: 127.0407, color: '#5a2a7a', label: '<strong>① Hotel Cappuccino</strong><br>호텔카푸치노 &mdash; checkout &amp; bag pickup' },
+          { lat: 37.5065, lng: 127.0385, color: '#2a5a8c', label: '<strong>② Bus 6703 Stop</strong><br>언주역 (호텔삼정) &mdash; K-Limousine 6703 toward ICN' }
+        ];
+        var ll = [];
+        pins.forEach(function(p, i) {
+          L.marker([p.lat, p.lng], { icon: makePin(i+1, p.color) }).addTo(map).bindPopup(p.label);
+          ll.push([p.lat, p.lng]);
+        });
+        map.fitBounds(L.latLngBounds(ll), { padding: [32,32] });
+      })();
+    </script>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-divider">Departure Day &mdash; Hotel to Incheon Airport</div>
+
+  <!-- Bus 6703 Departure -->
+  <div class="card walk">
+    <div class="card-header">
+      <span class="badge badge-walk">Transfer</span>
+      <div class="card-title">
+        Hotel Cappuccino &rarr; ICN Terminal 1 (Bus 6703)
+        <small>Gangnam &rarr; Incheon International Airport, T1</small>
+      </div>
+    </div>
+
+    <div class="timing-note">
+      <strong>&#128337; Departure Timeline</strong>
+      <div class="timing-row">
+        <span class="timing-pill warn">Check-Out: 12:20 PM</span>
+        <span class="timing-pill">Board Bus: 12:51 PM</span>
+        <span class="timing-pill">Arrive ICN T1: ~2:20 PM</span>
+        <span class="timing-pill">Check-In Opens: ~3:00 PM</span>
+        <span class="timing-pill warn">Check-In Closes: 5:00 PM</span>
+      </div>
+    </div>
+
+    <table class="timeline-table">
+      <tbody>
+        <tr>
+          <td>12:20 PM</td>
+          <td><strong>Check-Out</strong> &mdash; Settle bill at Hotel Cappuccino.</td>
+        </tr>
+        <tr>
+          <td>12:35 PM</td>
+          <td><strong>Walk to Bus Stop</strong> &mdash; Exit hotel, turn left, walk ~300m toward Hotel Samjung / Eonju Station.</td>
+        </tr>
+        <tr>
+          <td>12:45 PM</td>
+          <td><strong>Arrive at Stop</strong> &mdash; #6703 Limousine Bus Stop (Stop ID: 23-140).</td>
+        </tr>
+        <tr>
+          <td>12:51 PM</td>
+          <td><strong>Board Bus</strong> &mdash; Look for K-Limousine Route 6703. Tap T-Money card. Fare: &#8361;18,000/person.</td>
+        </tr>
+        <tr>
+          <td>~2:20 PM</td>
+          <td><strong>Arrive ICN T1</strong> &mdash; Bus drops off at Departure Level (3F). Use remaining KRW at airside shops after clearing security.</td>
+        </tr>
+        <tr>
+          <td>~3:00 PM</td>
+          <td><strong>Check-In Opens</strong> &mdash; Air Premia counters open (~3 hrs before departure). Head to T1 Row C to drop 23 kg bags and collect boarding passes.</td>
+        </tr>
+        <tr>
+          <td>5:00 PM</td>
+          <td><strong>Check-In Closes</strong> &mdash; Must have bags dropped and boarding passes in hand by this time.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-tip">
+      <strong>&#128176; Spend Remaining KRW at ICN</strong>
+      Use remaining KRW at airside duty-free shops and restaurants after clearing security. Won&rsquo;t be needed after this point.
+    </div>
+
+    <table class="detail-table">
+      <tr><td>Bus Fare (2p)</td><td>&#8361;36,000 (&#8361;18,000/person &mdash; tap T-Money)</td></tr>
+    </table>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-divider">ICN Terminal 1 &mdash; Security &amp; Departure</div>
+
+  <div class="card tour">
+    <div class="card-header">
+      <span class="badge badge-tour">Departure</span>
+      <div class="card-title">
+        ICN T1 Departure Process &mdash; Counter to Gate
+        <small>Allow 60&ndash;90 min from bag drop to seated at gate &nbsp;&bull;&nbsp; US passports, no visa required to exit Korea</small>
+      </div>
+    </div>
+
+    <table class="timeline-table">
+      <tbody>
+        <tr>
+          <td>Step 1</td>
+          <td><strong>Check-In &amp; Bag Drop</strong> &mdash; Air Premia Row C, 3F Departure Hall. Opens ~3:00 PM, closes 5:00 PM. Drop 23 kg bags, collect boarding passes.</td>
+        </tr>
+        <tr>
+          <td>Step 2</td>
+          <td><strong>Security Screening</strong> &mdash; Immediately after check-in, still on 3F. Remove laptops and liquids (100 ml rule applies). Belt and shoes typically stay on at ICN.</td>
+        </tr>
+        <tr>
+          <td>Step 3</td>
+          <td><strong>Departure Immigration (출국심사)</strong> &mdash; Show passport + boarding pass. US passport holders can use automated e-gates &mdash; look for <em>자동출입국심사</em> lanes. Typically 2&ndash;5 min, no stamp placed in passport.</td>
+        </tr>
+        <tr>
+          <td>Step 4</td>
+          <td><strong>Airside &mdash; Duty-Free &amp; Dining</strong> &mdash; T1 airside has extensive duty-free, restaurants, and cafes. Spend remaining KRW here. Confirm gate on departure boards &mdash; T1 gates are spread across multiple wings; allow 10&ndash;15 min to walk.</td>
+        </tr>
+        <tr>
+          <td>~5:20 PM</td>
+          <td><strong>Gate &amp; Boarding</strong> &mdash; YP111 boarding typically begins ~40 min before 18:00 departure. Check departure boards for gate assignment closer to boarding time.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-info">
+      <strong>E-Gate for US Passports:</strong> ICN T1 has automated departure e-gates (자동출입국심사) for biometric passport holders from visa-waiver countries including the USA. No staffed counter queue needed &mdash; scan passport, facial recognition, gate opens. No exit stamp is added to your passport.
+    </div>
+
+    <table class="detail-table">
+      <tr><td>Counter → Gate</td><td>Allow 60&ndash;90 min total (security + immigration + walk to gate)</td></tr>
+      <tr><td>Liquids rule</td><td>Max 100 ml per container in 1L clear zip-lock bag &mdash; pack in top of carry-on</td></tr>
+      <tr><td>Currency export</td><td>No restriction under USD 10,000 equivalent &mdash; no declaration needed</td></tr>
+      <tr><td>US customs on arrival</td><td>USD 800 per person duty-free exemption &mdash; declare purchases over this at SFO</td></tr>
+    </table>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-divider">Flight &mdash; ICN &rarr; SFO</div>
+
+  <!-- Flight: Air Premia YP111 -->
+  <div class="card flight">
+    <div class="card-header">
+      <span class="badge badge-flight">Flight</span>
+      <div class="card-title">
+        Air Premia YP111 &mdash; ICN &rarr; SFO
+        <small>Boeing 787-9 &nbsp;&bull;&nbsp; Non-stop &nbsp;&bull;&nbsp; 11 hrs &nbsp;&bull;&nbsp; Departs 18:00, Arrives 13:00 same calendar day</small>
+      </div>
+    </div>
+
+    <div class="timing-note">
+      <strong>&#9992;&#65039; Flight Details</strong>
+      <div class="timing-row">
+        <span class="timing-pill">Departs: 18:00 ICN T1</span>
+        <span class="timing-pill">Arrives: 13:00 SFO (Intl Terminal)</span>
+        <span class="timing-pill">Duration: 11 hrs</span>
+      </div>
+    </div>
+
+    <table class="detail-table">
+      <tr><td>Matthew Wong</td><td>Seat <strong>10D</strong> &nbsp;&bull;&nbsp; 1 &times; 23 kg checked + 1 &times; 10 kg carry-on</td></tr>
+      <tr><td>Mary Siu Wong</td><td>Seat <strong>10E</strong> &nbsp;&bull;&nbsp; 1 &times; 23 kg checked + 1 &times; 10 kg carry-on</td></tr>
+      <tr><td>Booking Ref</td><td><strong>VZ85JR</strong></td></tr>
+      <tr><td>Check-In</td><td>Air Premia counters, T1 Row C &mdash; opens ~3:00 PM, closes 5:00 PM</td></tr>
+    </table>
+
+    <div class="conf-strip">Booking Ref: VZ85JR &nbsp;&bull;&nbsp; Air Premia ICN&rarr;SFO &nbsp;&bull;&nbsp; June 3, 2026</div>
+  </div>
+
+  <div class="doc-footer">Seoul to SFO &mdash; June 3, 2026 &nbsp;|&nbsp; Air Premia YP111 &nbsp;|&nbsp; Booking Ref: VZ85JR</div>
+</div>
+</body>
+</html>

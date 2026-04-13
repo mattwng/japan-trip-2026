@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seoul &mdash; Thursday, May 28</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px; color: #222; background: #eef2f7; padding: 16px;
+    }
+    .page { max-width: 720px; margin: 0 auto; }
+
+    .doc-header {
+      background: #1a3a5c; color: #fff;
+      border-radius: 10px 10px 0 0; padding: 18px 22px 16px;
+    }
+    .doc-header h1 { font-size: 1.25em; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 5px; }
+    .doc-header .meta { font-size: 0.82em; opacity: 0.82; line-height: 1.5; }
+
+    .section-divider {
+      background: #2a5a8c; color: #fff;
+      font-size: 0.78em; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; padding: 6px 22px;
+    }
+
+    .card {
+      background: #fff; border-left: 4px solid #ccc;
+      padding: 16px 18px 14px; border-bottom: 1px solid #e0e0e0;
+    }
+    .card:last-child { border-radius: 0 0 10px 10px; border-bottom: none; }
+    .card.walk    { border-left-color: #4a7a3a; background: #f0f5ee; }
+    .card.tour    { border-left-color: #1a6a7a; background: #e8f5f8; }
+    .card.checkin { border-left-color: #5a2a7a; background: #f4f0fb; }
+    .card.train   { border-left-color: #2a4a6a; background: #f0f4f8; }
+    .card.food    { border-left-color: #8a5a1a; background: #fdf6ee; }
+    .card.opt     { border-left: 4px dashed #1a6a7a; background: #e8f5f8; opacity: 0.92; }
+
+    .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+    .card-title { font-size: 1.0em; font-weight: 700; color: #111; flex: 1; min-width: 0; }
+    .card-title small { display: block; font-weight: 400; font-size: 0.82em; color: #555; margin-top: 2px; }
+
+    .badge {
+      display: inline-block; font-size: 0.68em; font-weight: 700;
+      padding: 3px 8px; border-radius: 4px; text-transform: uppercase;
+      letter-spacing: 0.6px; white-space: nowrap; flex-shrink: 0;
+    }
+    .badge-walk    { background: #d4e8c8; color: #1a3a1a; }
+    .badge-tour    { background: #c8eaf0; color: #0a3a4a; }
+    .badge-checkin { background: #e0d4f0; color: #3a1a5a; }
+    .badge-train   { background: #d0dcea; color: #0a2a4a; }
+    .badge-food    { background: #f0dfc0; color: #4a2a00; }
+    .badge-free    { background: #e8e8d8; color: #2a2a1a; }
+
+    .details { font-size: 0.88em; line-height: 1.6; color: #333; }
+    .details p { margin-bottom: 6px; }
+    .details p:last-child { margin-bottom: 0; }
+
+    .callout-tip {
+      background: #fffbe8; border-left: 4px solid #c8a000;
+      border-radius: 0 5px 5px 0; padding: 9px 12px; margin: 0 0 12px;
+      font-size: 0.87em; color: #4a3800; line-height: 1.55;
+    }
+
+    .detail-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.87em; }
+    .detail-table tr { border-bottom: 1px solid #e0e8f0; }
+    .detail-table tr:last-child { border-bottom: none; }
+    .detail-table td { padding: 6px 4px; line-height: 1.5; color: #333; vertical-align: top; }
+    .detail-table td:first-child { font-weight: 700; color: #1a3a5c; width: 38%; padding-right: 12px; white-space: nowrap; }
+
+    /* Naver Maps tap links */
+    a.nmap-link {
+      color: #1a3a5c; font-weight: 600; text-decoration: none;
+      border-bottom: 1px dotted #2a5a8c;
+    }
+    a.nmap-link:hover { color: #2a6a9c; }
+
+    .warn { color: #b33; font-weight: 600; }
+    .doc-footer { text-align: center; font-size: 0.75em; color: #999; padding: 14px 0 4px; }
+
+    @media print {
+      @page { size: letter portrait; margin: 0.35in; }
+      body { background: #fff !important; padding: 0; font-size: 13px; color: #000 !important; }
+      .page { max-width: 100%; }
+      .doc-header { background: #fff !important; color: #000 !important; border: 2px solid #000; border-bottom: none; border-radius: 0; padding: 12px 16px; }
+      .doc-header h1 { color: #000 !important; font-size: 1.3em; }
+      .doc-header .meta { color: #000 !important; opacity: 1; }
+      .section-divider { background: #fff !important; color: #000 !important; border-top: 2px solid #000; border-left: 2px solid #000; border-right: 2px solid #000; border-bottom: 1px solid #555; padding: 5px 16px; font-size: 0.82em; }
+      .card { background: #fff !important; border: 2px solid #000 !important; border-top: none !important; border-left: 2px solid #000 !important; border-radius: 0 !important; padding: 11px 14px; }
+      .card + .card { border-top: 1px solid #555 !important; }
+      .card:last-child { border-bottom: 2px solid #000 !important; }
+      .card.walk, .card.tour, .card.checkin, .card.train, .card.food, .card.opt { background: #fff !important; }
+      .badge-walk, .badge-tour, .badge-checkin, .badge-train, .badge-food, .badge-free { background: #fff !important; color: #000 !important; border: 1px solid #000; }
+      .details { color: #000 !important; }
+      .callout-tip { background: #fff !important; color: #000 !important; border: 2px solid #000 !important; border-left-width: 4px !important; border-radius: 0 !important; }
+      .detail-table td { color: #000 !important; }
+      .detail-table td:first-child { color: #000 !important; }
+      a.nmap-link { color: #000 !important; border-bottom: none; }
+      .doc-footer { color: #000 !important; }
+    }
+
+    @media screen and (max-width: 600px) {
+      body { padding: 0; font-size: 14px; background: #eef2f7; }
+      .page { max-width: 100%; }
+      .doc-header { border-radius: 0; padding: 16px 16px 14px; }
+      .doc-header h1 { font-size: 1.1em; }
+      .section-divider { padding: 6px 16px; font-size: 0.75em; }
+      .card { padding: 14px 14px 12px; }
+      .card:last-child { border-radius: 0; }
+      .card-title { font-size: 1.05em; }
+      .detail-table { font-size: 0.84em; }
+      .doc-footer { padding: 16px 16px 24px; }
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+<div class="page">
+
+  <div class="doc-header">
+    <h1>Seoul &mdash; Thursday, May 28</h1>
+    <div class="meta">Day 1 of 6 &nbsp;&bull;&nbsp; Gangnam / Yeoksam-ro &nbsp;&bull;&nbsp; Hotel Cappuccino</div>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-divider">Locations &mdash; Tap to Open in Naver Maps</div>
+
+  <div class="card checkin">
+    <div class="card-header">
+      <span class="badge badge-checkin">Naver Maps</span>
+      <div class="card-title">
+        Evening Stops &mdash; Walking Directions
+        <small>Tap any name to open Naver Maps with destination set &mdash; uses your current location as start</small>
+      </div>
+    </div>
+    <table class="detail-table">
+      <tr>
+        <td>1 &mdash; Muse Clinic</td>
+        <td>
+          <a class="nmap-link" href="nmap://route/walk?dlat=37.5052&amp;dlng=127.0250&amp;dname=%EB%AE%A4%EC%A6%88%ED%81%B4%EB%A6%AC%EB%8B%89%20%EA%B0%95%EB%82%A8&amp;appname=com.travel.itinerary">뮤즈클리닉 강남</a><br>
+          <small>Gangnam-daero, near Sinnonhyeon Station</small>
+        </td>
+      </tr>
+      <tr>
+        <td>2 &mdash; Bongeunsa Temple</td>
+        <td>
+          <a class="nmap-link" href="nmap://route/walk?dlat=37.5133&amp;dlng=127.0575&amp;dname=%EB%B4%89%EC%9D%80%EC%82%AC&amp;appname=com.travel.itinerary">봉은사</a><br>
+          <small>531 Bongeunsa-ro, Gangnam-gu &nbsp;&bull;&nbsp; 봉은사로 531, 강남구</small>
+        </td>
+      </tr>
+      <tr>
+        <td>3 &mdash; City Beer</td>
+        <td>
+          <a class="nmap-link" href="nmap://route/walk?dlat=37.5008&amp;dlng=127.0318&amp;dname=%EC%8B%9C%ED%8B%B0%EB%B9%84%EC%96%B4%20%EC%97%AD%EC%82%BC&amp;appname=com.travel.itinerary">시티비어 역삼</a><br>
+          <small>123 Yeoksam-ro, Gangnam-gu &nbsp;&bull;&nbsp; 역삼로 123, 강남구</small>
+        </td>
+      </tr>
+      <tr>
+        <td>4 &mdash; Hotel Cappuccino</td>
+        <td>
+          <a class="nmap-link" href="nmap://route/walk?dlat=37.5075&amp;dlng=127.0407&amp;dname=%ED%98%B8%ED%85%94%EC%B9%B4%ED%91%B8%EC%B9%98%EB%85%B8&amp;appname=com.travel.itinerary">호텔카푸치노</a><br>
+          <small>106 Eonju-ro, Gangnam-gu &nbsp;&bull;&nbsp; 언주로 106, 강남구</small>
+        </td>
+      </tr>
+      <tr>
+        <td>5 &mdash; Bus 6703 Stop</td>
+        <td>
+          <a class="nmap-link" href="nmap://route/walk?dlat=37.5065&amp;dlng=127.0385&amp;dname=%EC%96%B8%EC%A3%BC%EC%97%AD+%ED%98%B8%ED%85%94%EC%82%BC%EC%A0%95&amp;appname=com.travel.itinerary">언주역 (호텔삼정)</a><br>
+          <small>K Limousine Bus 6703 &nbsp;&bull;&nbsp; Stop ID 23-140 &nbsp;&bull;&nbsp; ~300m from Hotel Cappuccino</small>
+        </td>
+      </tr>
+      <tr>
+        <td>6 &mdash; Woori Bank ATM</td>
+        <td>
+          <a class="nmap-link" href="nmap://search?query=%EC%9A%B0%EB%A6%AC%EC%9D%80%ED%96%89+%EC%8B%A0%EB%85%BC%ED%98%84&amp;appname=com.travel.itinerary">우리은행 신논현</a><br>
+          <small>Global ATM &nbsp;&bull;&nbsp; Near Muse Clinic, Gangnam-daero &nbsp;&bull;&nbsp; U.S. debit accepted</small>
+        </td>
+      </tr>
+      <tr>
+        <td>7 &mdash; 7-Eleven ATM</td>
+        <td>
+          <a class="nmap-link" href="nmap://search?query=%EC%84%B8%EB%B8%90%EC%9D%BC%EB%A0%88%EB%B8%90+%EC%8B%A0%EB%85%BC%ED%98%84&amp;appname=com.travel.itinerary">세븐일레븐 신논현</a><br>
+          <small>Seven Bank ATM &nbsp;&bull;&nbsp; Near Muse Clinic &nbsp;&bull;&nbsp; U.S. debit accepted</small>
+        </td>
+      </tr>
+    </table>
+    <div id="day28-map" style="width:100%; height:280px; border-radius:5px; margin:12px 0 6px; z-index:0;"></div>
+    <p style="font-size:0.75em; color:#555; text-align:center; margin:0 0 4px;">Tap a pin for details &nbsp;&bull;&nbsp; Pinch to zoom &nbsp;&bull;&nbsp; © OpenStreetMap contributors</p>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      (function() {
+        function makePin(n, c) {
+          return L.divIcon({ className: '', html: '<div style="width:28px;height:28px;border-radius:50%;background:' + c + ';color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,0,0,0.18);box-shadow:0 2px 5px rgba(0,0,0,0.35);">' + n + '</div>', iconSize: [28,28], iconAnchor: [14,14], popupAnchor: [0,-16] });
+        }
+        var map = L.map('day28-map', { scrollWheelZoom: false });
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', { attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>', maxZoom: 19 }).addTo(map);
+        var pins = [
+          { lat: 37.5052, lng: 127.0250, color: '#1a6a7a', label: '<strong>① Muse Clinic</strong><br>뮤즈클리닉 &mdash; appointment' },
+          { lat: 37.5133, lng: 127.0575, color: '#1a6a7a', label: '<strong>② Bongeunsa Temple</strong><br>봉은사 &mdash; evening temple visit' },
+          { lat: 37.5008, lng: 127.0318, color: '#8a5a1a', label: '<strong>③ City Beer</strong><br>시티비어 &mdash; dinner &amp; drinks' },
+          { lat: 37.5075, lng: 127.0407, color: '#5a2a7a', label: '<strong>④ Hotel Cappuccino</strong><br>호텔카푸치노 &mdash; Gangnam' },
+          { lat: 37.5065, lng: 127.0385, color: '#2a5a8c', label: '<strong>⑤ Bus 6703 Stop</strong><br>언주역 (호텔삼정) &mdash; K-Limousine' }
+        ];
+        var ll = [];
+        pins.forEach(function(p, i) {
+          L.marker([p.lat, p.lng], { icon: makePin(i+1, p.color) }).addTo(map).bindPopup(p.label);
+          ll.push([p.lat, p.lng]);
+        });
+        map.fitBounds(L.latLngBounds(ll), { padding: [32,32] });
+      })();
+    </script>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-divider">Evening &mdash; Bongeunsa to City Beer</div>
+
+  <!-- Transfer: Bongeunsa → City Beer -->
+  <div class="card walk">
+    <div class="card-header">
+      <span class="badge badge-walk">Transfer</span>
+      <div class="card-title">
+        Bongeunsa Temple &rarr; City Beer
+        <small>Gangnam / COEX &rarr; Yeoksam-ro, Gangnam-gu</small>
+      </div>
+    </div>
+    <div class="details">
+      <p><strong>Walk:</strong> ~15&ndash;20 min, ~1.2&ndash;1.5 km south through central Gangnam &mdash; a pleasant evening stroll.</p>
+    </div>
+    <table class="detail-table">
+      <tr>
+        <td>Start</td>
+        <td>
+          <a class="nmap-link" href="nmap://route/walk?dlat=37.5133&amp;dlng=127.0575&amp;dname=%EB%B4%89%EC%9D%80%EC%82%AC&amp;appname=com.travel.itinerary">Bongeunsa Temple (봉은사)</a><br>
+          <small>531 Bongeunsa-ro, Gangnam-gu &nbsp;&bull;&nbsp; 봉은사로 531, 강남구</small>
+        </td>
+      </tr>
+      <tr>
+        <td>End</td>
+        <td>
+          <a class="nmap-link" href="nmap://route/walk?dlat=37.5008&amp;dlng=127.0318&amp;dname=%EC%8B%9C%ED%8B%B0%EB%B9%84%EC%96%B4%20%EC%97%AD%EC%82%BC&amp;appname=com.travel.itinerary">City Beer (시티비어 역삼)</a><br>
+          <small>123 Yeoksam-ro, Gangnam-gu &nbsp;&bull;&nbsp; 역삼로 123, 강남구</small>
+        </td>
+      </tr>
+      <tr><td>Cost</td><td>Free</td></tr>
+    </table>
+  </div>
+
+  <!-- Dinner: City Beer -->
+  <div class="card food">
+    <div class="card-header">
+      <span class="badge badge-food">Dinner</span>
+      <div class="card-title">
+        City Beer (Evening)
+        <small>123 Yeoksam-ro, Gangnam-gu &nbsp;&bull;&nbsp; Walk-in</small>
+      </div>
+    </div>
+    <div class="details">
+      <p>Chan Sung Jung&rsquo;s (&ldquo;The Korean Zombie&rdquo;) bar and restaurant &mdash; food, craft beer, and MMA memorabilia in a neighbourhood bar run by one of Korea&rsquo;s most beloved UFC fighters. ~1.5 km from Hotel Cappuccino. A great first-night capstone.</p>
+    </div>
+    <table class="detail-table">
+      <tr>
+        <td>Address</td>
+        <td>
+          <a class="nmap-link" href="nmap://route/walk?dlat=37.5008&amp;dlng=127.0318&amp;dname=%EC%8B%9C%ED%8B%B0%EB%B9%84%EC%96%B4%20%EC%97%AD%EC%82%BC&amp;appname=com.travel.itinerary">시티비어 역삼</a><br>
+          <small>123 Yeoksam-ro, Gangnam-gu &nbsp;&bull;&nbsp; 역삼로 123, 강남구</small>
+        </td>
+      </tr>
+      <tr><td>Est. Cost (2p)</td><td>~&#8361;80,000&ndash;&#8361;120,000</td></tr>
+      <tr><td>Per person</td><td>~&#8361;40,000&ndash;&#8361;60,000</td></tr>
+      <tr><td>Payment</td><td>Card accepted</td></tr>
+    </table>
+  </div>
+
+  <!-- Transfer: City Beer → Hotel -->
+  <div class="card walk">
+    <div class="card-header">
+      <span class="badge badge-walk">Transfer</span>
+      <div class="card-title">
+        City Beer &rarr; Hotel Cappuccino
+        <small>Yeoksam-ro, Gangnam-gu &rarr; Gangnam</small>
+      </div>
+    </div>
+    <div class="details">
+      <p><strong>Walk:</strong> ~15&ndash;20 min, ~1.5 km &mdash; a straightforward evening stroll back through central Gangnam.</p>
+    </div>
+    <table class="detail-table">
+      <tr>
+        <td>Start</td>
+        <td>
+          <a class="nmap-link" href="nmap://route/walk?dlat=37.5008&amp;dlng=127.0318&amp;dname=%EC%8B%9C%ED%8B%B0%EB%B9%84%EC%96%B4%20%EC%97%AD%EC%82%BC&amp;appname=com.travel.itinerary">City Beer (시티비어 역삼)</a><br>
+          <small>123 Yeoksam-ro, Gangnam-gu &nbsp;&bull;&nbsp; 역삼로 123, 강남구</small>
+        </td>
+      </tr>
+      <tr>
+        <td>End</td>
+        <td>
+          <a class="nmap-link" href="nmap://route/walk?dlat=37.5075&amp;dlng=127.0407&amp;dname=%ED%98%B8%ED%85%94%EC%B9%B4%ED%91%B8%EC%B9%98%EB%85%B8&amp;appname=com.travel.itinerary">Hotel Cappuccino (호텔카푸치노)</a><br>
+          <small>106 Eonju-ro, Gangnam-gu &nbsp;&bull;&nbsp; 언주로 106, 강남구</small>
+        </td>
+      </tr>
+      <tr><td>Cost</td><td>Free</td></tr>
+    </table>
+  </div>
+
+  <div class="doc-footer">Seoul &mdash; May 28&ndash;Jun 3, 2026 &nbsp;|&nbsp; Hotel Cappuccino, Gangnam</div>
+</div>
+</body>
+</html>

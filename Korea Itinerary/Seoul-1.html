@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seoul &mdash; Monday, June 1</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px; color: #222; background: #eef2f7; padding: 16px;
+    }
+    .page { max-width: 720px; margin: 0 auto; }
+
+    .doc-header {
+      background: #1a3a5c; color: #fff;
+      border-radius: 10px 10px 0 0; padding: 18px 22px 16px;
+    }
+    .doc-header h1 { font-size: 1.25em; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 5px; }
+    .doc-header .meta { font-size: 0.82em; opacity: 0.82; line-height: 1.5; }
+
+    .section-divider {
+      background: #2a5a8c; color: #fff;
+      font-size: 0.78em; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; padding: 6px 22px;
+    }
+
+    .card {
+      background: #fff; border-left: 4px solid #ccc;
+      padding: 16px 18px 14px; border-bottom: 1px solid #e0e0e0;
+    }
+    .card:last-child { border-radius: 0 0 10px 10px; border-bottom: none; }
+    .card.walk    { border-left-color: #4a7a3a; background: #f0f5ee; }
+    .card.tour    { border-left-color: #1a6a7a; background: #e8f5f8; }
+    .card.checkin { border-left-color: #5a2a7a; background: #f4f0fb; }
+    .card.train   { border-left-color: #2a4a6a; background: #f0f4f8; }
+    .card.food    { border-left-color: #8a5a1a; background: #fdf6ee; }
+    .card.opt     { border-left: 4px dashed #1a6a7a; background: #e8f5f8; opacity: 0.92; }
+
+    .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+    .card-title { font-size: 1.0em; font-weight: 700; color: #111; flex: 1; min-width: 0; }
+    .card-title small { display: block; font-weight: 400; font-size: 0.82em; color: #555; margin-top: 2px; }
+
+    .badge {
+      display: inline-block; font-size: 0.68em; font-weight: 700;
+      padding: 3px 8px; border-radius: 4px; text-transform: uppercase;
+      letter-spacing: 0.6px; white-space: nowrap; flex-shrink: 0;
+    }
+    .badge-walk    { background: #d4e8c8; color: #1a3a1a; }
+    .badge-tour    { background: #c8eaf0; color: #0a3a4a; }
+    .badge-checkin { background: #e0d4f0; color: #3a1a5a; }
+    .badge-train   { background: #d0dcea; color: #0a2a4a; }
+    .badge-food    { background: #f0dfc0; color: #4a2a00; }
+    .badge-free    { background: #e8e8d8; color: #2a2a1a; }
+
+    .details { font-size: 0.88em; line-height: 1.6; color: #333; }
+    .details p { margin-bottom: 6px; }
+    .details p:last-child { margin-bottom: 0; }
+    .details ul { margin: 4px 0 6px 18px; }
+    .details ul li { margin-bottom: 3px; }
+
+    .timing-note {
+      background: #e8f5e8; border-left: 4px solid #3a7a3a;
+      border-radius: 0 5px 5px 0; padding: 10px 14px; margin-bottom: 14px;
+      font-size: 0.87em; color: #1a3a1a; line-height: 1.55;
+    }
+    .timing-note strong { color: #1a4a1a; }
+    .timing-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .timing-pill {
+      background: #fff; border: 1px solid #3a7a3a; border-radius: 4px;
+      padding: 4px 10px; font-size: 0.85em; font-weight: 600;
+      color: #1a4a1a; white-space: nowrap;
+    }
+    .timing-pill.warn { border-color: #c0392b; color: #c0392b; }
+
+    .callout-warn {
+      background: #fff3cd; border-left: 4px solid #e0a000;
+      border-radius: 0 5px 5px 0; padding: 9px 12px; margin: 0 0 12px;
+      font-size: 0.87em; color: #5a3c00; line-height: 1.55;
+    }
+    .callout-warn strong { display: block; margin-bottom: 2px; color: #3a2800; }
+    .callout-warn.danger { background: #fff0f0; border-left-color: #c0392b; color: #7a0000; }
+    .callout-warn.danger strong { color: #c0392b; }
+    .callout-info {
+      background: #edf4ff; border: 1px solid #bcd4f0;
+      border-radius: 5px; padding: 8px 12px; margin: 0 0 12px;
+      font-size: 0.85em; color: #1a3a5c; line-height: 1.55;
+    }
+    .callout-tip {
+      background: #fffbe8; border-left: 4px solid #c8a000;
+      border-radius: 0 5px 5px 0; padding: 9px 12px; margin: 0 0 12px;
+      font-size: 0.87em; color: #4a3800; line-height: 1.55;
+    }
+
+    .nav-box {
+      background: #f0f4f8; border: 1px solid #b0c4d8;
+      border-left: 4px solid #2a5a8c; border-radius: 0 6px 6px 0;
+      padding: 10px 14px; margin-bottom: 14px;
+      font-size: 0.86em; color: #1a2a3a; line-height: 1.6;
+    }
+    .nav-box strong { color: #1a3a5c; }
+    .nav-box .nav-title { font-weight: 700; font-size: 1.0em; color: #1a3a5c; display: block; margin-bottom: 6px; }
+    .nav-box ul { margin: 6px 0 0 18px; padding: 0; }
+    .nav-box ul li { margin-bottom: 4px; }
+
+    .detail-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.87em; }
+    .detail-table tr { border-bottom: 1px solid #e0e8f0; }
+    .detail-table tr:last-child { border-bottom: none; }
+    .detail-table td { padding: 6px 4px; line-height: 1.5; color: #333; vertical-align: top; }
+    .detail-table td:first-child { font-weight: 700; color: #1a3a5c; width: 38%; padding-right: 12px; white-space: nowrap; }
+
+    .warn { color: #b33; font-weight: 600; }
+    .doc-footer { text-align: center; font-size: 0.75em; color: #999; padding: 14px 0 4px; }
+
+    /* Naver Maps tap links */
+    a.nmap-link {
+      color: #1a3a5c; font-weight: 600; text-decoration: none;
+      border-bottom: 1px dotted #2a5a8c;
+    }
+    a.nmap-link:hover { color: #2a6a9c; }
+
+    @media print {
+      @page { size: letter portrait; margin: 0.35in; }
+      body { background: #fff !important; padding: 0; font-size: 13px; color: #000 !important; }
+      .page { max-width: 100%; }
+      .doc-header { background: #fff !important; color: #000 !important; border: 2px solid #000; border-bottom: none; border-radius: 0; padding: 12px 16px; }
+      .doc-header h1 { color: #000 !important; font-size: 1.3em; }
+      .doc-header .meta { color: #000 !important; opacity: 1; }
+      .section-divider { background: #fff !important; color: #000 !important; border-top: 2px solid #000; border-left: 2px solid #000; border-right: 2px solid #000; border-bottom: 1px solid #555; padding: 5px 16px; font-size: 0.82em; }
+      .card { background: #fff !important; border: 2px solid #000 !important; border-top: none !important; border-left: 2px solid #000 !important; border-radius: 0 !important; padding: 11px 14px; }
+      .card + .card { border-top: 1px solid #555 !important; }
+      .card:last-child { border-bottom: 2px solid #000 !important; }
+      .card.walk, .card.tour, .card.checkin, .card.train, .card.food, .card.opt { background: #fff !important; }
+      .badge-walk, .badge-tour, .badge-checkin, .badge-train, .badge-food, .badge-free { background: #fff !important; color: #000 !important; border: 1px solid #000; }
+      .details { color: #000 !important; }
+      .warn { color: #000 !important; }
+      .timing-note { background: #fff !important; color: #000 !important; border: 2px solid #000 !important; border-left-width: 4px !important; border-radius: 0 !important; }
+      .timing-note strong { color: #000 !important; }
+      .timing-pill { background: #fff !important; color: #000 !important; border: 1px solid #000 !important; border-radius: 0 !important; }
+      .timing-pill.warn { color: #000 !important; border-color: #000 !important; }
+      .nav-box { background: #fff !important; color: #000 !important; border: 2px solid #000 !important; border-left-width: 4px !important; border-radius: 0 !important; }
+      .nav-box strong, .nav-box .nav-title { color: #000 !important; }
+      .callout-warn, .callout-warn.danger { background: #fff !important; color: #000 !important; border: 2px solid #000 !important; border-left-width: 4px !important; border-radius: 0 !important; }
+      .callout-warn strong, .callout-warn.danger strong { color: #000 !important; }
+      .callout-info { background: #fff !important; color: #000 !important; border: 1.5px solid #000 !important; border-radius: 0 !important; }
+      .callout-tip { background: #fff !important; color: #000 !important; border: 2px solid #000 !important; border-left-width: 4px !important; border-radius: 0 !important; }
+      .detail-table td { color: #000 !important; }
+      .detail-table td:first-child { color: #000 !important; }
+      .doc-footer { color: #000 !important; }
+    }
+
+    @media screen and (max-width: 600px) {
+      body { padding: 0; font-size: 14px; background: #eef2f7; }
+      .page { max-width: 100%; }
+      .doc-header { border-radius: 0; padding: 16px 16px 14px; }
+      .doc-header h1 { font-size: 1.1em; }
+      .section-divider { padding: 6px 16px; font-size: 0.75em; }
+      .card { padding: 14px 14px 12px; }
+      .card:last-child { border-radius: 0; }
+      .card-title { font-size: 1.05em; }
+      .timing-note { font-size: 0.92em; padding: 10px 12px; }
+      .timing-row { gap: 6px; }
+      .timing-pill { font-size: 0.88em; padding: 5px 10px; }
+      .nav-box { font-size: 0.9em; padding: 10px 12px; }
+      .callout-warn { font-size: 0.92em; padding: 10px 12px; }
+      .callout-info { font-size: 0.9em; }
+      .detail-table { font-size: 0.84em; }
+      .doc-footer { padding: 16px 16px 24px; }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+<div class="page">
+
+  <div class="doc-header">
+    <h1>Seoul &mdash; Monday, June 1</h1>
+    <div class="meta">Day 5 of 6 &nbsp;&bull;&nbsp; Mangwon Market &rarr; Mangridan-gil &rarr; Han River &rarr; Battleship Park &rarr; Hongdae &nbsp;&bull;&nbsp; Hotel Cappuccino</div>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-divider">Locations &mdash; Tap to Open in Naver Maps</div>
+  <div class="card checkin">
+    <div class="card-header">
+      <span class="badge badge-checkin">Naver Maps</span>
+      <div class="card-title">
+        Monday Stops &mdash; Walking Directions
+        <small>Tap any name to open Naver Maps with destination set &mdash; works from any starting point</small>
+      </div>
+    </div>
+    <table class="detail-table">
+      <tr><td>1 &mdash; Hotel Cappuccino</td>
+        <td><a class="nmap-link" href="nmap://route/walk?dlat=37.5075&amp;dlng=127.0407&amp;dname=호텔카푸치노&amp;appname=com.travel.itinerary">호텔카푸치노</a> &mdash; home base, Gangnam-gu</td></tr>
+      <tr><td>2 &mdash; Mangwon Market</td>
+        <td><a class="nmap-link" href="nmap://route/walk?dlat=37.5549&amp;dlng=126.9094&amp;dname=망원시장&amp;appname=com.travel.itinerary">망원시장</a> &mdash; local market, Mapo-gu</td></tr>
+      <tr><td>3 &mdash; Mangridan-gil</td>
+        <td><a class="nmap-link" href="nmap://route/walk?dlat=37.5528&amp;dlng=126.9123&amp;dname=망리단길&amp;appname=com.travel.itinerary">망리단길</a> &mdash; cafe &amp; brunch street</td></tr>
+      <tr><td>4 &mdash; Mangwon Hangang Park</td>
+        <td><a class="nmap-link" href="nmap://route/walk?dlat=37.5490&amp;dlng=126.9110&amp;dname=망원한강공원&amp;appname=com.travel.itinerary">망원한강공원</a> &mdash; riverside park, Han River</td></tr>
+      <tr><td>5 &mdash; Seoul Battleship (전함)</td>
+        <td><a class="nmap-link" href="nmap://search?query=망원한강공원+전함&amp;appname=com.travel.itinerary">망원한강공원 전함</a> &mdash; decommissioned patrol boat display</td></tr>
+      <tr><td>6 &mdash; Baeknyeon Tojong Samgyetang</td>
+        <td><a class="nmap-link" href="nmap://route/walk?dlat=37.5563&amp;dlng=126.9259&amp;dname=백년토종삼계탕&amp;appname=com.travel.itinerary">백년토종삼계탕</a> &mdash; ginseng chicken soup dinner</td></tr>
+    </table>
+    <div id="day1-map" style="width:100%; height:280px; border-radius:5px; margin:12px 0 6px; z-index:0;"></div>
+    <p style="font-size:0.75em; color:#555; text-align:center; margin:0 0 4px;">Tap a pin for details &nbsp;&bull;&nbsp; Pinch to zoom &nbsp;&bull;&nbsp; © OpenStreetMap contributors</p>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      (function() {
+        function makePin(n, c) {
+          return L.divIcon({ className: '', html: '<div style="width:28px;height:28px;border-radius:50%;background:' + c + ';color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,0,0,0.18);box-shadow:0 2px 5px rgba(0,0,0,0.35);">' + n + '</div>', iconSize: [28,28], iconAnchor: [14,14], popupAnchor: [0,-16] });
+        }
+        var map = L.map('day1-map', { scrollWheelZoom: false });
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', { attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>', maxZoom: 19 }).addTo(map);
+        var pins = [
+          { lat: 37.5075, lng: 127.0407, color: '#5a2a7a', label: '<strong>① Hotel Cappuccino</strong><br>호텔카푸치노 &mdash; Gangnam' },
+          { lat: 37.5549, lng: 126.9094, color: '#1a6a7a', label: '<strong>② Mangwon Market</strong><br>망원시장 &mdash; morning market' },
+          { lat: 37.5528, lng: 126.9123, color: '#1a6a7a', label: '<strong>③ Mangridan-gil</strong><br>망리단길 &mdash; cafe &amp; brunch street' },
+          { lat: 37.5490, lng: 126.9110, color: '#4a7a3a', label: '<strong>④ Mangwon Hangang Park</strong><br>망원한강공원 &mdash; riverside park, Han River' },
+          { lat: 37.5492, lng: 126.9108, color: '#4a7a3a', label: '<strong>⑤ Seoul Battleship</strong><br>망원한강공원 전함 &mdash; decommissioned patrol boat' },
+          { lat: 37.5563, lng: 126.9259, color: '#8a5a1a', label: '<strong>⑥ Baeknyeon Tojong Samgyetang</strong><br>백년토종삼계탕 &mdash; ginseng chicken soup dinner' }
+        ];
+        var ll = [];
+        pins.forEach(function(p, i) {
+          L.marker([p.lat, p.lng], { icon: makePin(i+1, p.color) }).addTo(map).bindPopup(p.label);
+          ll.push([p.lat, p.lng]);
+        });
+        map.fitBounds(L.latLngBounds(ll), { padding: [32,32] });
+      })();
+    </script>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-divider">Morning &mdash; Mangwon Market &amp; Mangridan-gil</div>
+
+  <!-- Transfer: Hotel → Mangwon Market -->
+  <div class="card walk">
+    <div class="card-header">
+      <span class="badge badge-walk">Transfer</span>
+      <div class="card-title">
+        Hotel Cappuccino &rarr; Mangwon Market (망원시장)
+        <small>Gangnam &rarr; Mapo-gu &nbsp;&bull;&nbsp; Depart 10:30 AM</small>
+      </div>
+    </div>
+    <div class="details">
+      <p><strong>Taxi (Kakao T):</strong> ~20&ndash;25 min, ~&#8361;14,000&ndash;&#8361;18,000. Direct run across the Han River into Mangwon-dong &mdash; ask the driver for &ldquo;Mangwon Market&rdquo; (망원시장).</p>
+    </div>
+    <table class="detail-table">
+      <tr><td>Cost (2p, taxi)</td><td>~&#8361;28,000&ndash;&#8361;36,000</td></tr>
+    </table>
+  </div>
+
+  <!-- Mangwon Market -->
+  <div class="card tour">
+    <div class="card-header">
+      <span class="badge badge-tour">Market</span>
+      <div class="card-title">
+        Mangwon Market Exploration
+        <small>Mangwon-dong, Mapo-gu &nbsp;&bull;&nbsp; 11:00 AM</small>
+      </div>
+    </div>
+    <div class="details">
+      <p>One of Seoul&rsquo;s most authentic neighbourhood markets &mdash; a covered indoor+outdoor maze of food stalls, produce, and old-school Korean snacks. Far less touristy than Gwangjang.</p>
+      <p><strong>Must-try street snacks:</strong></p>
+      <ul>
+        <li><strong>Ssiat Hotteok</strong> &mdash; sweet seed-filled pancake; look for the stall with the longest queue</li>
+        <li><strong>Gochu-twigim</strong> &mdash; deep-fried large green peppers stuffed with pork; crispy and addictive</li>
+        <li><strong>Dakgangjeong (Q&rsquo;s)</strong> &mdash; sweet &amp; spicy Korean fried chicken bites</li>
+        <li><strong>Tteokgalbi</strong> &mdash; grilled short-rib rice cakes; sweet and smoky</li>
+      </ul>
+    </div>
+    <table class="detail-table">
+      <tr><td>Est. Cost (2p)</td><td>~&#8361;10,000&ndash;&#8361;20,000</td></tr>
+      <tr><td>Payment</td><td><strong>Cash only</strong> at all stalls</td></tr>
+    </table>
+  </div>
+
+  <!-- Mangridan-gil Walk -->
+  <div class="card walk">
+    <div class="card-header">
+      <span class="badge badge-walk">Walk</span>
+      <div class="card-title">
+        Mangridan-gil Boutique Walk
+        <small>Mangwon-dong, Mapo-gu &nbsp;&bull;&nbsp; 12:30 PM &nbsp;&bull;&nbsp; ~15&ndash;20 min toward Han River</small>
+      </div>
+    </div>
+    <div class="details">
+      <p>Exit the market and wander down <strong>Mangridan-gil</strong> &mdash; a quiet residential street lined with specialty caf&eacute;s, concept stores, and independent boutiques far from the tourist trail.</p>
+      <p><strong>Look out for:</strong></p>
+      <ul>
+        <li><strong>Crow Canyon Showroom</strong> &mdash; beautifully crafted Korean enamelware and kitchen goods; ideal for a small, easy-to-pack souvenir</li>
+        <li><strong>Deep Blue Lake Coffee</strong> &mdash; Nordic-style specialty coffee in a minimal concrete space</li>
+      </ul>
+    </div>
+    <table class="detail-table">
+      <tr><td>Est. Cost (2p)</td><td>~&#8361;5,000&ndash;&#8361;15,000 (coffee &amp; browsing)</td></tr>
+    </table>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-divider">Afternoon &mdash; Han River &amp; Battleship Park</div>
+
+  <!-- Mangwon Hangang Park -->
+  <div class="card tour">
+    <div class="card-header">
+      <span class="badge badge-tour">Riverside</span>
+      <div class="card-title">
+        Mangwon Hangang Park &mdash; Riverside Downtime
+        <small>Mangwon Hangang Park &nbsp;&bull;&nbsp; 1:00 PM &nbsp;&bull;&nbsp; Mangridan-gil empties directly onto the park</small>
+      </div>
+    </div>
+    <div class="details">
+      <p>Intentional, unstructured time by the water. One of Seoul&rsquo;s quieter riverside parks; far less crowded than Yeouido, with long grassy banks and a gentle bike path.</p>
+      <p><strong>Options:</strong></p>
+      <ul>
+        <li>Sit on the grass or a riverside bench and watch the river</li>
+        <li><strong>GS25 or CU riverside convenience store</strong> &mdash; grab a cold drink or snack</li>
+        <li><strong>Starbucks Mangwon Hangang</strong> (floating pier) &mdash; proper seat over the water</li>
+      </ul>
+      <p><em>Seoul Battleship Park is a ~5 min walk &mdash; depart at <strong>3:20 PM</strong> to arrive at 3:30 PM.</em></p>
+    </div>
+    <table class="detail-table">
+      <tr><td>Est. Cost (2p)</td><td>~&#8361;5,000&ndash;&#8361;10,000 (drinks &amp; snacks)</td></tr>
+    </table>
+  </div>
+
+  <!-- Seoul Battleship Park -->
+  <div class="card tour">
+    <div class="card-header">
+      <span class="badge badge-tour">Museum</span>
+      <div class="card-title">
+        Seoul Battleship Park (서울함공원)
+        <small>Mangwon Hangang Park &nbsp;&bull;&nbsp; 3:30 PM &nbsp;&bull;&nbsp; ~30&ndash;45 min</small>
+      </div>
+    </div>
+    <div class="details">
+      <p>A decommissioned Korean naval destroyer and support vessel, permanently moored at the Han River as an open-air museum. Walk the decks, explore the below-deck exhibits, and take in river views from the bridge.</p>
+    </div>
+    <table class="detail-table">
+      <tr><td>Admission (2p)</td><td>~&#8361;3,000 at senior rate (&#8361;1,500/person, 50% off)</td></tr>
+    </table>
+  </div>
+
+  <!-- Sunset at Han River -->
+  <div class="card tour">
+    <div class="card-header">
+      <span class="badge badge-tour">Sunset</span>
+      <div class="card-title">
+        Sunset at Han River &mdash; Mangwon Hangang Park
+        <small>5:00 PM &nbsp;&bull;&nbsp; Starbucks Mangwon Hangang floating pier</small>
+      </div>
+    </div>
+    <div class="callout-tip">
+      <strong>&#127873; Han River Convenience Store Tradition</strong>
+      Stop at the riverside GS25 or CU: buy a paper bowl and instant ramen packet, use the hot water machine on the spot. The classic low-cost, high-vibe Seoul experience at the river.
+    </div>
+    <div class="details">
+      <p>Settle in as the afternoon light shifts over the Han. The floating Starbucks pier extends into the river &mdash; 360&deg; river views over a drink.</p>
+      <p><em><strong>Depart for dinner at 6:15 PM</strong> &mdash; short taxi (~8&ndash;10 min, ~&#8361;5,000&ndash;&#8361;8,000) to Baeknyeon Tojong Samgyetang in Hongdae.</em></p>
+    </div>
+    <table class="detail-table">
+      <tr><td>Est. Cost (2p)</td><td>~&#8361;5,000&ndash;&#8361;10,000 (coffee &amp; snacks)</td></tr>
+    </table>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-divider">Evening &mdash; Dinner in Hongdae</div>
+
+  <!-- Dinner: Samgyetang -->
+  <div class="card food">
+    <div class="card-header">
+      <span class="badge badge-food">Dinner</span>
+      <div class="card-title">
+        Baeknyeon Tojong Samgyetang (백년토종삼계탕)
+        <small>118 Yanghwa-ro, Mapo-gu &nbsp;&bull;&nbsp; 6:30 PM &nbsp;&bull;&nbsp; Near Hongik University Station Exit 3</small>
+      </div>
+    </div>
+    <div class="details">
+      <p>One of Seoul&rsquo;s most celebrated samgyetang institutions, using native Korean <em>tojong</em> chickens (indigenous breed, richer flavour than commercial). Short taxi from Mangwon Hangang Park into Hongdae &mdash; entirely within the same Mapo-gu pocket of the day.</p>
+      <p><strong>삼계탕 Samgyetang:</strong> A whole young chicken stuffed with glutinous rice, ginseng root, jujube, and garlic, simmered into a milky-white, deeply restorative broth. Each person receives their own pot. Season to taste with the salt and black pepper at the table.</p>
+      <p><em>Return to hotel: Taxi from Hongdae to Hotel Cappuccino (~25&ndash;30 min, ~&#8361;18,000&ndash;&#8361;22,000 via Kakao T).</em></p>
+    </div>
+    <table class="detail-table">
+      <tr><td>Est. Cost (2p)</td><td>~&#8361;40,000&ndash;&#8361;60,000</td></tr>
+      <tr><td>Per person</td><td>~&#8361;20,000&ndash;&#8361;30,000</td></tr>
+      <tr><td>Payment</td><td>Cash preferred</td></tr>
+      <tr><td>Booking</td><td>Call to reserve: +82-2-325-3399 (book March 2026)</td></tr>
+    </table>
+  </div>
+
+  <div class="doc-footer">Seoul &mdash; May 28&ndash;Jun 3, 2026 &nbsp;|&nbsp; Hotel Cappuccino, Gangnam</div>
+</div>
+</body>
+</html>
