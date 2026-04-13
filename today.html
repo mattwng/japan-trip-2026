@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Today's Itinerary</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;
+      background:#1a3a5c; color:#fff;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      min-height:100vh; text-align:center; padding:32px;
+    }
+    .icon { font-size:3em; margin-bottom:16px; }
+    h1 { font-size:1.2em; font-weight:700; margin-bottom:8px; }
+    .date { font-size:0.9em; opacity:0.7; margin-bottom:32px; }
+    .dest { font-size:1em; font-weight:600; background:rgba(255,255,255,.15);
+      padding:12px 24px; border-radius:24px; margin-bottom:32px; }
+    .spinner {
+      width:32px; height:32px; border:3px solid rgba(255,255,255,.3);
+      border-top-color:#fff; border-radius:50%;
+      animation:spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .fallback { font-size:0.8em; opacity:0.6; margin-top:24px; }
+    a { color:#7ab8f5; }
+  </style>
+</head>
+<body>
+  <div class="icon">&#128507;</div>
+  <h1>Today's Itinerary</h1>
+  <div class="date" id="dateLabel"></div>
+  <div class="dest" id="destLabel">Loading&#8230;</div>
+  <div class="spinner" id="spinner"></div>
+  <div class="fallback" id="fallback" style="display:none">
+    Not a trip day &mdash; <a href="index.html">Open Index</a>
+  </div>
+
+  <script>
+    var routes = {
+      '05-18': { label:'Kauai \u2192 Kii-Tanabe (Travel)', url:'Japan%20Itinerary/Kauai-Kii-Tanabe.html' },
+      '05-19': { label:'Kauai \u2192 Kii-Tanabe (Travel)', url:'Japan%20Itinerary/Kauai-Kii-Tanabe.html' },
+      '05-20': { label:'Kauai \u2192 Kii-Tanabe (Travel)', url:'Japan%20Itinerary/Kauai-Kii-Tanabe.html' },
+      '05-21': { label:'Kii-Tanabe \u2192 Takijiri-oji', url:'Japan%20Itinerary/Kii-Tanabe-Takijiri.html' },
+      '05-22': { label:'Day 1 \u2014 Takijiri \u2192 Takahara', url:'Japan%20Itinerary/Day1-Hike.html' },
+      '05-23': { label:'Day 2 \u2014 Takahara \u2192 Chikatsuyu', url:'Japan%20Itinerary/Day2-Hike.html' },
+      '05-24': { label:'Day 3 \u2014 Hosshinmon \u2192 Hongu', url:'Japan%20Itinerary/Day3-Hike.html' },
+      '05-25': { label:'Day 4 \u2014 Kumano Sanzan Loop', url:'Japan%20Itinerary/Day4-Tour.html' },
+      '05-26': { label:'Day 5 \u2014 Tuna Market & Cave Onsen', url:'Japan%20Itinerary/Day5-Tuna.html' }
+    };
+
+    var now = new Date();
+    var mm = String(now.getMonth() + 1).padStart(2, '0');
+    var dd = String(now.getDate()).padStart(2, '0');
+    var key = mm + '-' + dd;
+
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    document.getElementById('dateLabel').textContent =
+      months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
+
+    var route = routes[key];
+    if (route) {
+      document.getElementById('destLabel').textContent = route.label;
+      setTimeout(function(){ window.location.replace(route.url); }, 800);
+    } else {
+      document.getElementById('destLabel').style.display = 'none';
+      document.getElementById('spinner').style.display = 'none';
+      document.getElementById('fallback').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
