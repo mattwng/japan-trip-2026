@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cash Plan &mdash; Japan</title>
+  <style>
+
+    /* ── Reset ── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ── Base ── */
+    body {
+      font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px;
+      color: #222;
+      background: #eef2f7;
+      padding: 16px;
+    }
+
+    /* ── Page wrapper ── */
+    .page { max-width: 720px; margin: 0 auto; }
+
+    /* ── Document Header ── */
+    .doc-header {
+      background: #1a3a5c;
+      color: #fff;
+      border-radius: 10px 10px 0 0;
+      padding: 18px 22px 16px;
+    }
+    .doc-header h1 { font-size: 1.25em; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 5px; }
+    .doc-header .meta { font-size: 0.82em; opacity: 0.82; line-height: 1.5; }
+
+    /* ── Section Divider ── */
+    .section-divider {
+      background: #2a5a8c;
+      color: #fff;
+      font-size: 0.78em;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 6px 22px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: #fff;
+      border-left: 4px solid #ccc;
+      padding: 16px 18px 14px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .card:last-child { border-radius: 0 0 10px 10px; border-bottom: none; }
+
+    /* Card type accents */
+    .card.revolut   { border-left-color: #1a7a8a; background: #e8f7fa; }
+    .card.chase     { border-left-color: #1a3a8c; background: #edf0fb; }
+    .card.suica     { border-left-color: #2a7a3a; background: #eef8ee; }
+    .card.budget    { border-left-color: #9a5a10; background: #fdf8ee; }
+    .card.bus       { border-left-color: #8a4520; background: #fdf3ec; }
+    .card.atm       { border-left-color: #5a2a7a; background: #f5f0fb; }
+    .card.checklist { border-left-color: #3a7a3a; background: #f0f8f0; }
+    .card.summary   { border-left-color: #1a3a5c; background: #f0f4f8; }
+    .card.neutral   { border-left-color: #888;    background: #fafafa; }
+    .card.day-bus   { border-left-color: #2a5a8c; background: #f5f8fc; }
+    .card.day-tour  { border-left-color: #1a6a7a; background: #e8f5f8; }
+    .card.no-bus    { border-left-color: #aaa;    background: #f8f8f8; }
+
+    /* ── Card Header ── */
+    .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+    .card-title { font-size: 1.0em; font-weight: 700; color: #111; flex: 1; min-width: 0; }
+    .card-title small { display: block; font-weight: 400; font-size: 0.82em; color: #555; margin-top: 2px; }
+
+    /* ── Badges ── */
+    .badge {
+      display: inline-block; font-size: 0.68em; font-weight: 700;
+      padding: 3px 8px; border-radius: 4px; text-transform: uppercase;
+      letter-spacing: 0.6px; white-space: nowrap; flex-shrink: 0;
+    }
+    .badge-revolut   { background: #b0e4ec; color: #0a3040; }
+    .badge-chase     { background: #c8d4f4; color: #0a1a4a; }
+    .badge-suica     { background: #c8e8c8; color: #1a4a1a; }
+    .badge-budget    { background: #f0d8a8; color: #4a2a00; }
+    .badge-bus       { background: #f0ccac; color: #4a1a00; }
+    .badge-atm       { background: #e0d4f0; color: #3a1a5a; }
+    .badge-checklist { background: #c8e8c8; color: #1a4a1a; }
+    .badge-summary   { background: #c4d0e0; color: #1a2a3c; }
+
+    /* ── Inline tags ── */
+    .tag {
+      display: inline-block; font-size: 0.70em; font-weight: 700;
+      padding: 1px 6px; border-radius: 3px; text-transform: uppercase;
+      letter-spacing: 0.4px; white-space: nowrap;
+    }
+    .tag-cash { background: #8b1a00; color: #fff; }
+    .tag-free { background: #2a7a3a; color: #fff; }
+    .tag-card { background: #1a3a8c; color: #fff; }
+    .tag-warn { background: #e0a000; color: #fff; }
+    .tag-ok   { background: #2a7a3a; color: #fff; }
+
+    /* ── Data tables ── */
+    .data-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.85em; }
+    .data-table th {
+      background: #1a3a5c; color: #fff;
+      font-size: 0.76em; text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 6px 10px; text-align: left; font-weight: 700;
+    }
+    .data-table td {
+      padding: 7px 10px; border-bottom: 1px solid #e0e8f0;
+      line-height: 1.5; color: #333; vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .total-row td {
+      background: #e8eef8; font-weight: 700; color: #1a3a5c;
+      border-top: 1.5px solid #2a5a8c; border-bottom: none;
+    }
+    .data-table .atm-gap-row td { background: #fff0f0; color: #8b1a00; font-weight: 600; }
+    .data-table .cash-row td   { background: #fff8f0; }
+    .data-table .ok-row td     { background: #f0f8f0; }
+    .data-table td strong      { color: #1a2a3a; }
+    .yen { white-space: nowrap; }
+
+    /* ── Callouts ── */
+    .callout-warn {
+      background: #fff3cd; border-left: 4px solid #e0a000;
+      border-radius: 0 5px 5px 0; padding: 9px 12px; margin: 0 0 12px;
+      font-size: 0.87em; color: #5a3c00; line-height: 1.55;
+    }
+    .callout-warn strong { color: #3a2800; }
+    .callout-info {
+      background: #edf4ff; border: 1px solid #bcd4f0;
+      border-radius: 5px; padding: 8px 12px; margin: 8px 0 12px;
+      font-size: 0.85em; color: #1a3a5c; line-height: 1.55;
+    }
+    .callout-tip {
+      background: #f0f8f0; border-left: 4px solid #3a7a3a;
+      border-radius: 0 5px 5px 0; padding: 9px 12px; margin: 0 0 12px;
+      font-size: 0.87em; color: #1a4a1a; line-height: 1.55;
+    }
+    .callout-cash {
+      background: #fff0ee; border-left: 4px solid #8b1a00;
+      border-radius: 0 5px 5px 0; padding: 9px 12px; margin: 8px 0 12px;
+      font-size: 0.87em; color: #4a0a00; line-height: 1.55;
+    }
+    .callout-cash strong { color: #6a0000; }
+
+    /* ── Timing note ── */
+    .timing-note {
+      background: #e8f5e8; border-left: 4px solid #3a7a3a;
+      border-radius: 0 5px 5px 0; padding: 10px 14px; margin-bottom: 14px;
+      font-size: 0.87em; color: #1a3a1a; line-height: 1.55;
+    }
+    .timing-note strong { color: #1a4a1a; }
+    .timing-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .timing-pill {
+      background: #fff; border: 1px solid #3a7a3a; border-radius: 4px;
+      padding: 4px 10px; font-size: 0.85em; font-weight: 600;
+      color: #1a4a1a; white-space: nowrap;
+    }
+
+    /* ── Option blocks ── */
+    .option-block {
+      background: #f5f7fa; border: 1px solid #c8d4e4;
+      border-left: 3px solid #2a5a8c; border-radius: 0 5px 5px 0;
+      padding: 9px 12px; margin-bottom: 10px;
+      font-size: 0.87em; line-height: 1.6;
+    }
+    .option-label { font-weight: 700; color: #1a3a5c; display: block; margin-bottom: 4px; font-size: 0.95em; }
+
+    /* ── Sub-heading ── */
+    .sub-heading {
+      font-size: 0.82em; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.5px; color: #1a3a5c;
+      margin: 14px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #c8d8e8;
+    }
+
+    /* ── Check list (interactive checkboxes) ── */
+    .check-list { list-style: none; padding: 0; margin: 8px 0; }
+    .check-list li {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 7px 0; border-bottom: 1px solid #e0e8e0;
+      font-size: 0.88em; line-height: 1.55; color: #333;
+    }
+    .check-list li:last-child { border-bottom: none; }
+    .check-list input[type="checkbox"] {
+      flex-shrink: 0; margin-top: 2px;
+      width: 16px; height: 16px; accent-color: #2a7a3a; cursor: pointer;
+    }
+
+    /* ── Bullet list ── */
+    .bullet-list { padding-left: 18px; margin: 8px 0; font-size: 0.88em; line-height: 1.7; color: #333; }
+    .bullet-list li { margin-bottom: 3px; }
+    .bullet-list li strong { color: #1a2a3a; }
+
+    /* ── Step list (numbered instructions) ── */
+    .step-list { list-style: none; padding: 0; margin: 10px 0; }
+    .step-list li {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 8px 0; border-bottom: 1px solid #e0e8f0;
+      font-size: 0.88em; line-height: 1.6; color: #333;
+    }
+    .step-list li:last-child { border-bottom: none; }
+    .step-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: #5a2a7a; color: #fff; font-size: 0.72em; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+
+    /* ── Payment box ── */
+    .payment-box {
+      background: #fff; border: 1.5px solid #5a2a7a;
+      border-radius: 6px; padding: 12px 14px; margin-top: 14px;
+      font-size: 0.88em; line-height: 1.8;
+    }
+    .payment-title {
+      font-weight: 700; font-size: 0.78em; text-transform: uppercase;
+      letter-spacing: 0.6px; color: #5a2a7a; display: block; margin-bottom: 8px;
+    }
+    .payment-row { display: flex; justify-content: space-between; color: #444; padding: 2px 0; }
+    .payment-total {
+      display: flex; justify-content: space-between;
+      font-weight: 700; color: #1a1a1a; font-size: 1.0em;
+      border-top: 1.5px solid #5a2a7a; padding-top: 6px; margin-top: 4px;
+    }
+    .payment-buffer { display: flex; justify-content: space-between; color: #2a7a3a; font-size: 0.88em; margin-top: 4px; }
+
+    /* ── Revolut load rows ── */
+    .load-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid #c0e4ec; font-size: 0.88em;
+    }
+    .load-row:last-child { border-bottom: none; }
+    .load-name { font-weight: 700; color: #0a3a4a; }
+    .load-amount { font-weight: 700; font-size: 1.0em; color: #1a7a8a; }
+
+    /* ── ATM stop box ── */
+    .atm-box {
+      background: #f0ecf8; border: 1.5px solid #5a2a7a;
+      border-radius: 8px; padding: 14px 16px; margin: 12px 0;
+    }
+    .atm-box-title {
+      font-weight: 700; font-size: 0.80em; text-transform: uppercase;
+      letter-spacing: 0.7px; color: #5a2a7a; display: block; margin-bottom: 10px;
+    }
+    .atm-stop {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 10px 0; border-bottom: 1px solid #d0c0e8;
+    }
+    .atm-stop:last-child { border-bottom: none; padding-bottom: 0; }
+    .atm-stop-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #5a2a7a; color: #fff; font-size: 0.80em; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .atm-stop-body { flex: 1; }
+    .atm-stop-title { font-weight: 700; color: #3a1a5a; font-size: 0.95em; margin-bottom: 3px; }
+    .atm-stop-loc { font-size: 0.83em; color: #5a4a6a; margin-bottom: 6px; }
+    .atm-person {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 4px; font-size: 0.86em;
+    }
+    .atm-amount-pill {
+      display: inline-block; background: #5a2a7a; color: #fff;
+      font-size: 0.88em; font-weight: 700; padding: 2px 12px;
+      border-radius: 4px;
+    }
+    .atm-person-name { color: #3a1a5a; font-weight: 600; }
+    .atm-note { font-size: 0.80em; color: #5a4a6a; margin-top: 4px; }
+
+    /* ── Grand total box ── */
+    .grand-box {
+      background: #1a3a5c; color: #fff;
+      border-radius: 6px; padding: 14px 16px; margin-top: 14px;
+    }
+    .grand-label {
+      font-size: 0.74em; text-transform: uppercase; letter-spacing: 0.8px;
+      opacity: 0.75; display: block; margin-bottom: 8px;
+    }
+    .grand-row { display: flex; justify-content: space-between; opacity: 0.9; font-size: 0.9em; padding: 2px 0; }
+    .grand-final {
+      display: flex; justify-content: space-between;
+      font-weight: 700; font-size: 1.15em;
+      border-top: 1px solid rgba(255,255,255,0.35);
+      padding-top: 8px; margin-top: 8px;
+    }
+
+    /* ── Decision tree ── */
+    .decision-tree {
+      background: #f5f7fa; border: 1px solid #c8d4e0;
+      border-radius: 6px; padding: 14px 16px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.82em; line-height: 1.75; color: #1a2a3a;
+      white-space: pre; overflow-x: auto;
+    }
+
+    /* ── Details text ── */
+    .details { font-size: 0.88em; line-height: 1.65; color: #333; }
+    .details p { margin-bottom: 6px; }
+    .details p:last-child { margin-bottom: 0; }
+
+    /* ── Document footer ── */
+    .doc-footer { text-align: center; font-size: 0.75em; color: #999; padding: 14px 0 4px; }
+
+    /* ────────────────────────────────────────
+       PRINT STYLES
+    ──────────────────────────────────────── */
+    @media print {
+      @page { size: letter portrait; margin: 0.35in; }
+      body { background: #fff !important; padding: 0; font-size: 12px; color: #000 !important; }
+      .page { max-width: 100%; }
+      .doc-header {
+        background: #fff !important; color: #000 !important;
+        border: 2px solid #000; border-bottom: none; border-radius: 0; padding: 12px 16px;
+      }
+      .doc-header h1 { color: #000 !important; font-size: 1.3em; }
+      .doc-header .meta { color: #000 !important; opacity: 1; }
+      .section-divider {
+        background: #fff !important; color: #000 !important;
+        border-top: 2px solid #000; border-left: 2px solid #000;
+        border-right: 2px solid #000; border-bottom: 1px solid #555;
+        padding: 5px 16px; font-size: 0.82em;
+      }
+      .card {
+        background: #fff !important;
+        border: 2px solid #000 !important; border-top: none !important;
+        border-left: 2px solid #000 !important; border-radius: 0 !important; padding: 12px 14px;
+      }
+      .card:last-child { border-bottom: 2px solid #000 !important; }
+      .card.revolut, .card.chase, .card.suica, .card.budget,
+      .card.bus, .card.atm, .card.checklist, .card.summary,
+      .card.day-bus, .card.day-tour, .card.no-bus, .card.neutral { background: #fff !important; }
+      .badge, .tag { background: #fff !important; color: #000 !important; border: 1px solid #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .data-table th { background: #000 !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .data-table td { border-bottom: 1px solid #888; }
+      .data-table .total-row td { background: #eee !important; border-top: 2px solid #000; }
+      .data-table .atm-gap-row td, .data-table .cash-row td, .data-table .ok-row td { background: #fff !important; }
+      .callout-warn, .callout-info, .callout-tip, .callout-cash {
+        background: #fff !important; color: #000 !important;
+        border: 2px solid #000 !important; border-left-width: 4px !important; border-radius: 0 !important;
+      }
+      .timing-note { background: #fff !important; color: #000 !important; border: 2px solid #000 !important; border-left-width: 4px !important; border-radius: 0 !important; }
+      .timing-pill { background: #fff !important; color: #000 !important; border: 1px solid #000 !important; border-radius: 0 !important; }
+      .option-block { background: #fff !important; color: #000 !important; border: 1px solid #000 !important; border-left-width: 3px !important; border-radius: 0 !important; }
+      .payment-box { border: 2px solid #000 !important; }
+      .payment-title, .payment-buffer { color: #000 !important; }
+      .payment-total { border-top: 2px solid #000 !important; }
+      .grand-box { background: #000 !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .atm-box { background: #fff !important; border: 2px solid #000 !important; }
+      .atm-stop { border-bottom: 1px solid #888; }
+      .atm-stop-num, .atm-amount-pill, .step-num { background: #000 !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .decision-tree { background: #fff !important; border: 1px solid #000 !important; }
+      .check-list li { border-bottom: 1px solid #888; }
+      .doc-footer { color: #000 !important; }
+    }
+
+    /* ────────────────────────────────────────
+       MOBILE
+    ──────────────────────────────────────── */
+    @media screen and (max-width: 600px) {
+      body { padding: 0; font-size: 14px; background: #eef2f7; }
+      .page { max-width: 100%; }
+      .doc-header { border-radius: 0; padding: 16px 16px 14px; }
+      .doc-header h1 { font-size: 1.1em; }
+      .section-divider { padding: 6px 16px; font-size: 0.75em; }
+      .card { padding: 14px 14px 12px; }
+      .card:last-child { border-radius: 0; }
+      .data-table { font-size: 0.80em; }
+      .data-table th, .data-table td { padding: 6px 7px; }
+      .decision-tree { font-size: 0.73em; padding: 10px 12px; }
+      .payment-box, .atm-box { padding: 10px 12px; }
+      .callout-warn, .callout-info, .callout-tip, .callout-cash { font-size: 0.9em; }
+      .bullet-list, .details { font-size: 0.90em; }
+    }
+
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ════ DOCUMENT HEADER ════ -->
+  <div class="doc-header">
+    <h1>Cash Plan &mdash; Japan</h1>
+    <div class="meta">Matthew Wong &bull; Mary Siu &bull; May 2026 &bull; Kumano Travel Res #186433</div>
+    <div class="meta">Revolut (ATM) &bull; Chase VISA + Apple Pay &bull; Mobile Suica (iPhone) &bull; Two ATM Stops</div>
+  </div>
+
+  <!-- ════ OVERVIEW ════ -->
+  <div class="section-divider">Overview</div>
+  <div class="card neutral">
+    <div class="details">
+      <p>This plan covers the full payment stack for Japan travel: ATM cash via Revolut, card payments via Chase VISA, transit via Suica, and a strategic cash withdrawal schedule tied to the itinerary. Hotels, trains, taxis, and card-accepting restaurants go on Chase VISA. Cash is reserved only for fixed obligations — rural buses, onsen taxes, Takkyubin, stamps, and small cash-only vendors.</p>
+    </div>
+    <div class="timing-row" style="margin-top: 12px;">
+      <span class="timing-pill" style="border-color:#1a7a8a; color:#0a3a4a;">💳 Revolut → ATM Cash</span>
+      <span class="timing-pill" style="border-color:#1a3a8c; color:#0a1a4a;">💳 Chase VISA → Apple Pay</span>
+      <span class="timing-pill" style="border-color:#2a7a3a; color:#1a4a1a;">🚃 Suica → iPhone Wallet</span>
+    </div>
+  </div>
+
+  <!-- ════ 1. REVOLUT CARD ════ -->
+  <div class="section-divider">1 &middot; Revolut Card &mdash; Primary ATM Source</div>
+  <div class="card revolut">
+    <div class="card-header">
+      <div class="card-title">Revolut Card<small>Fund in advance &bull; Withdraw JPY from ATMs in Japan</small></div>
+      <span class="badge badge-revolut">ATM</span>
+    </div>
+
+    <div class="sub-heading">Before Departure</div>
+    <ul class="check-list">
+      <li><input type="checkbox"> <span>Load <strong>$200 USD on each card</strong> ($400 combined, ~¥60,000 available)</span></li>
+      <li><input type="checkbox"> <span>Enable JPY currency in the Revolut app (Accounts → Add currency)</span></li>
+      <li><input type="checkbox"> <span>Confirm ATM withdrawal limits (standard: $1,200/month fee-free, then ~2% fee)</span></li>
+      <li><input type="checkbox"> <span>Enable for international use (Security → Location-based security: off, or add Japan)</span></li>
+      <li><input type="checkbox"> <span>Note your PIN — ATMs in Japan require PIN for all withdrawals</span></li>
+    </ul>
+
+    <div class="sub-heading">ATMs That Accept Foreign Cards in Japan</div>
+    <table class="data-table">
+      <thead><tr><th>ATM Network</th><th>Where to Find</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>7-Eleven ATM</strong></td><td>Every 7-Eleven convenience store</td><td>Most reliable for foreign cards</td></tr>
+        <tr><td><strong>Japan Post ATM</strong></td><td>Post offices nationwide</td><td>English interface available</td></tr>
+        <tr><td><strong>AEON Bank ATM</strong></td><td>AEON malls and some 7-Elevens</td><td>Also reliable</td></tr>
+        <tr><td><strong>Lawson ATM</strong></td><td>Lawson convenience stores</td><td>Generally works</td></tr>
+      </tbody>
+    </table>
+    <div class="callout-warn">⚠️ Avoid bank branch ATMs (Mizuho, SMBC, etc.) — they often reject foreign cards.</div>
+
+    <div class="sub-heading">Tips</div>
+    <ul class="bullet-list">
+      <li>Withdraw in larger amounts to minimize per-transaction fees</li>
+      <li>ATMs at airports (Narita, Haneda) are convenient on arrival</li>
+      <li>7-Eleven ATMs are open 24/7 and widely available everywhere</li>
+    </ul>
+  </div>
+
+  <!-- ════ 2. CHASE VISA ════ -->
+  <div class="section-divider">2 &middot; Chase VISA &mdash; Card Payments &amp; Apple Pay</div>
+  <div class="card chase">
+    <div class="card-header">
+      <div class="card-title">Chase VISA<small>Primary card &bull; Apple Pay for contactless where supported</small></div>
+      <span class="badge badge-chase">CARD</span>
+    </div>
+
+    <div class="sub-heading">Physical Card</div>
+    <ul class="check-list">
+      <li><input type="checkbox"> <span>Notify Chase of travel dates before departure (May 19–28)</span></li>
+      <li><input type="checkbox"> <span>Confirm no foreign transaction fees (varies by card — Sapphire cards: none)</span></li>
+      <li><input type="checkbox"> <span>Keep card accessible but separate from Revolut</span></li>
+    </ul>
+
+    <div class="sub-heading">Apple Pay</div>
+    <ul class="check-list">
+      <li><input type="checkbox"> <span>Add Chase VISA to Apple Wallet (if not already added)</span></li>
+      <li><input type="checkbox"> <span>Test contactless payment works before leaving</span></li>
+    </ul>
+    <div class="callout-info">Accepted at convenience stores (7-Eleven, Lawson, FamilyMart), department stores, hotels, larger restaurants, and electronics stores.</div>
+
+    <div class="sub-heading">Where Chase VISA Is Most Useful</div>
+    <ul class="bullet-list">
+      <li>Department stores (Isetan, Takashimaya, etc.)</li>
+      <li>Hotels — all accommodations on this trip accept card</li>
+      <li>Larger restaurants and chain restaurants</li>
+      <li>Electronics stores (Yodobashi, Bic Camera)</li>
+      <li>Tourist attractions with card readers</li>
+    </ul>
+    <div class="callout-warn">⚠️ Credit cards are NOT accepted at many smaller restaurants, izakayas, local shops, vending machines, and most shrines/temples — always carry cash.</div>
+  </div>
+
+  <!-- ════ 3. SUICA ════ -->
+  <div class="section-divider">3 &middot; Suica &mdash; Transit &amp; Convenience Payments</div>
+  <div class="card suica">
+    <div class="card-header">
+      <div class="card-title">Mobile Suica (iPhone)<small>Rechargeable IC card &bull; Trains, buses &amp; convenience stores</small></div>
+      <span class="badge badge-suica">SUICA</span>
+    </div>
+
+    <div class="sub-heading">Setup</div>
+    <ul class="check-list">
+      <li><input type="checkbox"> <span>Open Apple Wallet → tap <strong>+</strong> → search "Suica" → Create new Suica card</span></li>
+      <li><input type="checkbox"> <span>Works on: Tokyo Metro, JR lines, Shinkansen (IC), most city buses</span></li>
+    </ul>
+
+    <div class="sub-heading">Funding the Suica App</div>
+    <div class="option-block">
+      <span class="option-label">Option A — Chase VISA via Apple Pay &nbsp;<span class="tag tag-ok">RECOMMENDED</span></span>
+      In Apple Wallet, tap your Suica card → Add Money → select Chase VISA from Apple Pay. Most reliable option; Visa cards generally work for Suica top-ups.
+    </div>
+    <div class="option-block">
+      <span class="option-label">Option B — Revolut Card via Apple Pay &nbsp;<span class="tag tag-warn">TRY FIRST</span></span>
+      Add Revolut to Apple Wallet, then use the same Add Money flow. Many Revolut Visa cards work for Suica top-ups — worth trying as your first backup. If rejected, switch to Chase VISA or the station kiosk.
+    </div>
+    <div class="option-block" style="border-left-color: #3a7a3a;">
+      <span class="option-label" style="color: #1a5a1a;">Option C — Cash at Station Kiosk &nbsp;<span class="tag tag-free">BULLETPROOF</span></span>
+      Any JR station has green "Suica" kiosks that accept cash for top-ups. Use this if card top-up fails.
+    </div>
+
+    <div class="callout-tip">Load <strong>¥3,000–¥5,000</strong> on arrival. Top up at any station kiosk or via Apple Pay as needed.</div>
+
+    <div class="sub-heading">Where Suica Works Beyond Transit</div>
+    <ul class="bullet-list">
+      <li>7-Eleven, Lawson, FamilyMart, NewDays (convenience stores)</li>
+      <li>Vending machines (especially in train stations)</li>
+      <li>Some fast food chains (McDonald&rsquo;s, Yoshinoya)</li>
+      <li>Coin lockers in stations</li>
+    </ul>
+  </div>
+
+  <!-- ════ 4. CASH BUDGET ════ -->
+  <div class="section-divider">4 &middot; Cash-on-Hand Budget</div>
+  <div class="card budget">
+    <div class="card-header">
+      <div class="card-title">When You Need Cash<small>Japan is still heavily cash-dependent in rural and traditional areas</small></div>
+      <span class="badge badge-budget">BUDGET</span>
+    </div>
+    <ul class="bullet-list">
+      <li>Ramen shops, izakayas, local restaurants</li>
+      <li>Street food and market vendors</li>
+      <li>Temples and shrine entrance fees (¥300–¥1,000 each)</li>
+      <li>Taxis (most don&rsquo;t accept cards)</li>
+      <li>Vending machines</li>
+      <li>Onsen and bathhouses</li>
+      <li>Small souvenir shops</li>
+      <li>Local buses — cash-only routes (see Section 5)</li>
+    </ul>
+
+    <div class="sub-heading">Local Bus Fare Systems</div>
+    <table class="data-table">
+      <thead><tr><th>System</th><th>How It Works</th><th>Payment</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Flat fare</strong></td>
+          <td>Pay on entry — same price regardless of distance</td>
+          <td>Suica or cash</td>
+        </tr>
+        <tr>
+          <td><strong>Distance-based</strong></td>
+          <td>Take a numbered ticket on entry; fare display above driver shows amount by ticket number; pay on exit</td>
+          <td><span class="tag tag-cash">Cash only</span> — exact change required</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout-warn">⚠️ Distance-based buses often have a coin change machine near the driver — but arrive with the right coins rather than rely on it.</div>
+
+    <div class="sub-heading">Suica Acceptance by Bus Type</div>
+    <table class="data-table">
+      <thead><tr><th>Bus Type</th><th>Suica?</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Kyoto City Bus</td><td>✓ Yes</td><td>¥230 flat fare; IC card strongly encouraged</td></tr>
+        <tr><td>Tokyo Toei Bus</td><td>✓ Yes</td><td>¥210 flat fare</td></tr>
+        <tr><td>Osaka City Bus</td><td>✓ Yes</td><td>¥210 flat fare</td></tr>
+        <tr><td>Rural / prefectural buses</td><td>Sometimes</td><td>Varies by operator — do not assume</td></tr>
+        <tr><td>Tourist shuttle buses</td><td>Sometimes</td><td>Check route-specific info</td></tr>
+        <tr class="atm-gap-row"><td><strong>Ryujin / Meiko buses (this trip)</strong></td><td><strong>✗ No</strong></td><td><strong>Cash only — exact fare — no IC cards accepted</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="sub-heading">Daily Cash Estimate</div>
+    <table class="data-table">
+      <thead><tr><th>Category</th><th>Est. Daily (JPY)</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Meals — cash-only spots</td><td class="yen">¥2,000–¥4,000</td><td>Ramen ¥1,000, casual dinner ¥1,500–¥2,500</td></tr>
+        <tr><td>Transit — trains/city buses (Suica)</td><td class="yen">¥500–¥1,500</td><td>Handled by Suica, not cash</td></tr>
+        <tr><td>Local buses — cash-only routes</td><td class="yen">¥0–¥1,500</td><td>Rural days cost more</td></tr>
+        <tr><td>Temples / attractions</td><td class="yen">¥500–¥1,500</td><td>Varies by day</td></tr>
+        <tr><td>Incidentals / misc</td><td class="yen">¥500–¥1,000</td><td>Vending machines, snacks</td></tr>
+        <tr class="total-row"><td><strong>Daily cash subtotal</strong></td><td class="yen"><strong>¥3,000–¥8,500</strong></td><td>Higher end on rural/temple-heavy days</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ════ 5. ITINERARY BUS CASH ════ -->
+  <div class="section-divider">5 &middot; Itinerary Bus Cash &mdash; Day by Day (May 2026)</div>
+
+  <!-- Day 1 -->
+  <div class="card day-bus">
+    <div class="card-header">
+      <div class="card-title">Day 1 &mdash; Thursday, May 21<small>Kii-Tanabe → Takijiri-oji &bull; Ryujin Bus</small></div>
+      <span class="badge badge-bus">BUS</span>
+    </div>
+    <table class="data-table">
+      <tbody>
+        <tr><td><strong>Operator</strong></td><td>Ryujin Bus — Kumano Hongu Line</td></tr>
+        <tr><td><strong>Board at</strong></td><td>Kii-Tanabe Station — Bus Stop 1 (first bay on right exiting station)</td></tr>
+        <tr><td><strong>Schedule</strong></td><td>Departs 11:35 AM → arrives Takijiri-oji 12:16 PM</td></tr>
+        <tr><td><strong>Fare per person</strong></td><td class="yen">¥970</td></tr>
+        <tr class="total-row"><td><strong>Cash needed (2 persons)</strong></td><td class="yen"><strong>¥1,940</strong> &nbsp;<span class="tag tag-cash">Cash only</span></td></tr>
+        <tr><td><strong>Payment</strong></td><td>Exact fare — pay on alighting. Tell driver <strong>"Takijiri-oji"</strong> when boarding. Bus makes hail-and-ride stops.</td></tr>
+      </tbody>
+    </table>
+    <div class="callout-tip">⏱ Arrive at Bus Stop 1 by <strong>11:20 AM</strong> — 15 min before departure.</div>
+    <div class="callout-info"><strong>Evening:</strong> Free shuttle from Takahara Kiri no Sato → Guest House Kiyohime (arranged by the owner — no cash).</div>
+  </div>
+
+  <!-- Day 2 -->
+  <div class="card no-bus">
+    <div class="card-header">
+      <div class="card-title">Day 2 &mdash; Friday, May 22<small>No public buses</small></div>
+      <span class="badge" style="background:#e0e0e0; color:#555;">NO BUS</span>
+    </div>
+    <div class="details">
+      <p>Guest House Kiyohime provides a private shuttle to the trail start (Option A or B — confirm with the owner the night before). No cash needed for transit today.</p>
+    </div>
+  </div>
+
+  <!-- Day 3 -->
+  <div class="card day-bus">
+    <div class="card-header">
+      <div class="card-title">Day 3 &mdash; Saturday, May 23<small>Two-bus day: Chikatsuyu → Hosshinmon-oji, then Hongu → Yunomine Onsen</small></div>
+      <span class="badge badge-bus">2 BUSES</span>
+    </div>
+
+    <div class="sub-heading">Morning Transfer — Chikatsuyu to Hosshinmon-oji (2-bus journey)</div>
+    <div class="callout-tip">Leave Minshuku Chikatsuyu by <strong>9:20 AM</strong>. Walk west ~10 min to the bus stop at the Nakahechi Museum parking lot — sign reads 中辺路美術館前.</div>
+    <table class="data-table">
+      <tbody>
+        <tr><td><strong>Leg 1 — Meiko Bus</strong></td><td>Nakahechi Bijutsukan-mae → Hongu Taisha-mae</td></tr>
+        <tr><td><strong>Departs</strong></td><td>09:42 AM → arrives Hongu Taisha-mae 10:12 AM</td></tr>
+        <tr><td><strong>Transfer</strong></td><td>Wait ~18 min at Hongu Taisha-mae (Heritage Center has toilets &amp; vending machines)</td></tr>
+        <tr><td><strong>Leg 2 — Ryujin Bus</strong></td><td>Hongu Taisha-mae → Hosshinmon-oji (April–November only)</td></tr>
+        <tr><td><strong>Departs</strong></td><td>10:30 AM → arrives Hosshinmon-oji 10:45 AM</td></tr>
+        <tr><td><strong>Combined fare per person</strong></td><td class="yen">¥970</td></tr>
+        <tr class="total-row"><td><strong>Cash needed (2 persons)</strong></td><td class="yen"><strong>¥1,940</strong> &nbsp;<span class="tag tag-cash">Cash only</span></td></tr>
+        <tr><td><strong>Payment</strong></td><td>Exact fare — no IC cards accepted on Ryujin/Meiko rural buses</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sub-heading">Afternoon Transfer — Hongu Taisha to Yunomine Onsen</div>
+    <table class="data-table">
+      <tbody>
+        <tr><td><strong>Operator</strong></td><td>Ryujin Bus</td></tr>
+        <tr><td><strong>Board at</strong></td><td>Hongu Taisha-mae (in front of Kumano Hongu Heritage Center)</td></tr>
+        <tr><td><strong>Recommended</strong></td><td>Departs <strong>15:05</strong> → arrives Yunomine Onsen 15:29</td></tr>
+        <tr><td><strong>Alternates</strong></td><td>12:57 (early) or 16:40 — last bus; arrives 17:04. Call Takiyoshi if taking this: 0735-42-1515.</td></tr>
+        <tr><td><strong>Fare per person</strong></td><td class="yen">¥310–¥600 (confirm at stop board; distance-based, pay on exit)</td></tr>
+        <tr class="total-row"><td><strong>Cash needed (2 persons)</strong></td><td class="yen"><strong>¥620–¥1,200</strong> &nbsp;<span class="tag tag-cash">Cash only</span></td></tr>
+      </tbody>
+    </table>
+    <div class="callout-warn">⚠️ <strong>No bus to Yunomine Onsen after 16:40.</strong> Taxi alternative: ¥3,000–¥5,000 total (one vehicle, ~15–20 min). Must be pre-booked via Heritage Center staff or Kumano Travel Res #186433.</div>
+  </div>
+
+  <!-- Day 4 -->
+  <div class="card day-tour">
+    <div class="card-header">
+      <div class="card-title">Day 4 &mdash; Sunday, May 24<small>Kumano Sanzan Bus Tour — Yunomine Onsen → Kii-Katsuura</small></div>
+      <span class="badge" style="background:#c8eaf0; color:#0a3a4a;">TOUR BUS</span>
+    </div>
+    <table class="data-table">
+      <tbody>
+        <tr><td><strong>Operator</strong></td><td>Kumano Gobo Nankai Bus (blue/white coach)</td></tr>
+        <tr><td><strong>Route</strong></td><td>Yunomine → Hongu Taisha → Hayatama Taisha → Nachi Falls → Nachi Taisha → Kii-Katsuura</td></tr>
+        <tr><td><strong>Schedule</strong></td><td>Departs 9:44 AM (Yunomine Onsen main stop) → ~3:10 PM (Kii-Katsuura Station)</td></tr>
+        <tr><td><strong>Fare</strong></td><td class="yen">~¥12,600/person (~¥25,200 total)</td></tr>
+        <tr class="ok-row"><td><strong>Cash needed</strong></td><td><strong>¥0</strong> &nbsp;<span class="tag tag-card">Pre-paid or Card at boarding</span></td></tr>
+      </tbody>
+    </table>
+    <div class="callout-warn">⚠️ Board at the <strong>main "Yunomine Onsen" stop only</strong> — NOT at Shimo-yunomine (下湯の峰), which is a different stop further down the route.</div>
+  </div>
+
+  <!-- Days 5-6 -->
+  <div class="card no-bus">
+    <div class="card-header">
+      <div class="card-title">Days 5–6 &mdash; May 25–26<small>Kii-Katsuura &amp; Osaka Departure</small></div>
+      <span class="badge" style="background:#e0e0e0; color:#555;">NO BUS</span>
+    </div>
+    <div class="details">
+      <p>No local buses. Transport is on foot, the free Urashima Maru turtle shuttle (included via Manseiro pass), and the pre-booked JR Kuroshio limited express. <strong>Do not tap Suica to board the Kuroshio</strong> — reserved seats only.</p>
+    </div>
+  </div>
+
+  <!-- Bus Cash Summary -->
+  <div class="card summary">
+    <div class="card-header">
+      <div class="card-title">Bus Cash Summary — Full Trip</div>
+      <span class="badge badge-summary">SUMMARY</span>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Date</th><th>Route</th><th>Per Person</th><th>Total (2p)</th></tr></thead>
+      <tbody>
+        <tr class="cash-row"><td>May 21</td><td>Kii-Tanabe → Takijiri-oji (Ryujin)</td><td class="yen">¥970</td><td class="yen"><strong>¥1,940</strong></td></tr>
+        <tr class="cash-row"><td>May 23 AM</td><td>Nakahechi Bijutsukan-mae → Hosshinmon-oji (Meiko + Ryujin)</td><td class="yen">¥970</td><td class="yen"><strong>¥1,940</strong></td></tr>
+        <tr class="cash-row"><td>May 23 PM</td><td>Hongu Taisha-mae → Yunomine Onsen (Ryujin)</td><td class="yen">¥310–¥600</td><td class="yen"><strong>¥620–¥1,200</strong></td></tr>
+        <tr class="ok-row"><td>May 24</td><td>Kumano Sanzan tour loop (Gobo Nankai)</td><td>—</td><td><span class="tag tag-card">Card / Pre-paid</span></td></tr>
+        <tr class="total-row"><td colspan="3"><strong>Total cash for all buses</strong></td><td class="yen"><strong>¥4,500–¥5,080</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="callout-cash">Budget <strong>¥5,000 cash</strong> for all bus fares across the trip. The Ryujin Bus is always exact-fare and cash-only — have coins and small bills ready before boarding.</div>
+  </div>
+
+  <!-- Other Cash Obligations -->
+  <div class="card summary">
+    <div class="card-header">
+      <div class="card-title">Other Confirmed Cash Obligations</div>
+      <span class="badge badge-summary">ITINERARY</span>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Item</th><th>Date</th><th>Per Person</th><th>Total (2p)</th></tr></thead>
+      <tbody>
+        <tr class="cash-row">
+          <td>Onsen Tax + Takkyubin @ Kamenoi Hotel<br><small style="color:#888; line-height:1.6; display:block; margin-top:2px;">¥150 onsen tax + ¥2,510 Takkyubin (1 bag each) → Hotel Trusty Osaka Abeno. Drop bags at front desk by <strong>9:00 AM May 25</strong>.</small></td>
+          <td>May 24</td><td class="yen">¥2,660</td><td class="yen"><strong>¥5,320</strong></td>
+        </tr>
+        <tr class="cash-row">
+          <td>Onsen Tax @ Ryokan Manseiro<br><small style="color:#888; display:block; margin-top:2px;">Paid at check-in; cash only at ryokan.</small></td>
+          <td>May 25</td><td class="yen">¥150</td><td class="yen"><strong>¥300</strong></td>
+        </tr>
+        <tr class="cash-row">
+          <td>Dual Pilgrim Certificate<br><small style="color:#888; display:block; margin-top:2px;">Visitor Center near Kii-Katsuura Station; cash only.</small></td>
+          <td>May 25</td><td class="yen">¥500</td><td class="yen"><strong>¥1,000</strong></td>
+        </tr>
+        <tr class="cash-row">
+          <td>Ekiben — Kumano Wagyu bento<br><small style="color:#888; display:block; margin-top:2px;">Kii-Katsuura Station before boarding JR Kuroshio #22 (11:49 AM). Limited stock — buy early.</small></td>
+          <td>May 26</td><td class="yen">¥1,000–¥1,500</td><td class="yen"><strong>¥2,000–¥3,000</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Grand Total -->
+  <div class="card summary">
+    <div class="card-header">
+      <div class="card-title">Grand Total — All Confirmed Cash (2 Travelers)</div>
+      <span class="badge badge-atm">TOTAL</span>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Category</th><th>Date(s)</th><th>Total (2p)</th></tr></thead>
+      <tbody>
+        <tr><td>Buses — Ryujin/Meiko (all cash-only legs)</td><td>May 21, 23</td><td class="yen">¥4,500–¥5,080</td></tr>
+        <tr><td>Kamenoi Hotel — Onsen Tax + Takkyubin</td><td>May 24</td><td class="yen">¥5,320</td></tr>
+        <tr><td>Manseiro Ryokan — Onsen Tax</td><td>May 25</td><td class="yen">¥300</td></tr>
+        <tr><td>Dual Pilgrim Certificate</td><td>May 25</td><td class="yen">¥1,000</td></tr>
+        <tr><td>Ekiben — Kii-Katsuura Station</td><td>May 26</td><td class="yen">¥2,000–¥3,000</td></tr>
+        <tr><td>Misc — vending, snacks, incidentals<br><small style="color:#888; display:block; margin-top:2px;">¥500–¥1,000/person/day &times; ~10 days</small></td><td>May 19–28</td><td class="yen">¥9,000–¥18,000</td></tr>
+        <tr class="total-row"><td colspan="2"><strong>Total confirmed cash + misc</strong></td><td class="yen"><strong>¥22,120–¥32,700</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="callout-info">Hike days (May 21–23) are lower-end for misc — most meals included at accommodations. Town/explore days (May 25–26) on the higher end.</div>
+  </div>
+
+  <!-- Coin Prep Checklist -->
+  <div class="card checklist">
+    <div class="card-header">
+      <div class="card-title">Coin Prep Checklist — Bus Days</div>
+      <span class="badge badge-checklist">CHECKLIST</span>
+    </div>
+    <ul class="check-list">
+      <li><input type="checkbox"> <span><strong>May 19 (arrival night)</strong> — Withdraw ¥10,000 each at Seven Bank ATM, Haneda T3. Earmark ¥1,940 total for the May 21 Ryujin Bus.</span></li>
+      <li><input type="checkbox"> <span><strong>May 21 morning</strong> — Confirm <strong>¥1,940 total in hand</strong> before arriving at Bus Stop 1 (Kii-Tanabe Station, departs 11:35 AM)</span></li>
+      <li><input type="checkbox"> <span><strong>May 23 morning</strong> — Confirm <strong>¥1,940 total in hand</strong> before leaving Minshuku Chikatsuyu (bus departs 09:42 AM)</span></li>
+      <li><input type="checkbox"> <span><strong>May 23 afternoon</strong> — Have <strong>¥620–¥1,200</strong> ready for Hongu Taisha-mae → Yunomine Onsen (pay on exit, distance-based)</span></li>
+      <li><input type="checkbox"> <span><strong>May 24</strong> — No bus cash needed. Confirm Kumano Sanzan tour pre-payment status before leaving Yunomine Onsen.</span></li>
+    </ul>
+  </div>
+
+  <!-- ════ 6. STRATEGIC ATM WITHDRAWAL ════ -->
+  <div class="section-divider">6 &middot; Strategic ATM Withdrawal Plan</div>
+
+  <!-- Revolut Card Loading -->
+  <div class="card revolut">
+    <div class="card-header">
+      <div class="card-title">Revolut Card Loading<small>$200 per card &bull; $400 combined &bull; ~¥60,000 available</small></div>
+      <span class="badge badge-revolut">REVOLUT</span>
+    </div>
+    <div class="load-row">
+      <span class="load-name">Matthew&rsquo;s Revolut</span>
+      <span class="load-amount">$200 USD &nbsp;<span style="font-weight:400; font-size:0.88em; color:#555;">≈ ¥30,000</span></span>
+    </div>
+    <div class="load-row">
+      <span class="load-name">Mary&rsquo;s Revolut</span>
+      <span class="load-amount">$200 USD &nbsp;<span style="font-weight:400; font-size:0.88em; color:#555;">≈ ¥30,000</span></span>
+    </div>
+    <div class="load-row" style="border-top: 1.5px solid #1a7a8a; margin-top: 4px; padding-top: 10px;">
+      <span class="load-name" style="font-size:1.0em;">Combined available</span>
+      <span class="load-amount" style="font-size:1.1em;">$400 USD &nbsp;<span style="color:#1a4a5a; font-weight:700;">≈ ¥60,000</span></span>
+    </div>
+    <div class="callout-tip" style="margin-top: 12px;">Cash needed for the trip: <strong>¥28,000</strong>. The remaining ~¥32,000 equivalent stays on the cards as buffer and is not withdrawn unless needed.</div>
+  </div>
+
+  <!-- ATM Access Windows -->
+  <div class="card atm">
+    <div class="card-header">
+      <div class="card-title">ATM Access Windows — Full Trip<small>Know where you can and cannot withdraw before leaving each location</small></div>
+      <span class="badge badge-atm">ATM MAP</span>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>Date</th><th>Location</th><th>ATM</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>May 19 (arrival night)</td><td>Haneda T3, Arrivals Lobby 2F</td><td>Seven Bank</td><td><span class="tag tag-ok">✓ Primary</span></td></tr>
+        <tr><td>May 20</td><td>Nanki-Shirahama Airport</td><td>Seven Bank</td><td><span class="tag tag-ok">✓ Backup</span></td></tr>
+        <tr><td>May 20–21 AM</td><td>Kii-Tanabe Station</td><td>Seven Bank</td><td><span class="tag tag-ok">✓ Top-up</span></td></tr>
+        <tr class="atm-gap-row"><td><strong>May 21–24</strong></td><td><strong>Kumano Kodo trail region</strong></td><td><strong>None</strong></td><td><span class="tag tag-cash">✗ No ATMs</span></td></tr>
+        <tr><td>May 24 PM onward</td><td>Kii-Katsuura</td><td>7-Eleven / hotel area</td><td><span class="tag tag-ok">✓ Resupply</span></td></tr>
+        <tr><td>May 26+</td><td>Osaka — Tennoji / city</td><td>7-Eleven everywhere</td><td><span class="tag tag-ok">✓ Emergency</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Withdrawal 1 -->
+  <div class="card atm">
+    <div class="card-header">
+      <div class="card-title">Withdrawal 1 &mdash; Haneda T3 Seven Bank<small>Tuesday, May 19 &bull; After clearing customs &bull; Arrivals Lobby, 2F</small></div>
+      <span class="badge badge-atm">STOP 1</span>
+    </div>
+    <div class="callout-warn">Every yen needed for May 21–24 must be in hand before boarding the Ryujin Bus. There are <strong>no ATMs on the Kumano Kodo trail</strong>.</div>
+
+    <div class="sub-heading">How to Withdraw</div>
+    <ul class="step-list">
+      <li><span class="step-num">1</span><span>Exit the Baggage Hall through the Green Channel → Arrivals Lobby, 2F</span></li>
+      <li><span class="step-num">2</span><span>Seven Bank ATM is in the Arrivals Lobby — look for the orange signage</span></li>
+      <li><span class="step-num">3</span><span><strong>Matthew withdraws ¥10,000</strong> using his Revolut card</span></li>
+      <li><span class="step-num">4</span><span><strong>Mary withdraws ¥10,000</strong> using her Revolut card</span></li>
+    </ul>
+
+    <div class="payment-box">
+      <span class="payment-title">What ¥20,000 Total Covers (May 21–24)</span>
+      <div class="payment-row"><span>May 21 — Ryujin Bus: Kii-Tanabe → Takijiri-oji</span><span class="yen">¥1,940</span></div>
+      <div class="payment-row"><span>May 23 AM — Meiko + Ryujin: Chikatsuyu → Hosshinmon-oji</span><span class="yen">¥1,940</span></div>
+      <div class="payment-row"><span>May 23 PM — Ryujin Bus: Hongu Taisha-mae → Yunomine Onsen</span><span class="yen">¥620–¥1,200</span></div>
+      <div class="payment-row"><span>May 23 — Tsuboyu cave bath, Yunomine Onsen (¥900 &times; 2, reserve at tourist hut)</span><span class="yen">¥1,800</span></div>
+      <div class="payment-row"><span>May 24 — Nachi Falls entrance fee (¥300 &times; 2)</span><span class="yen">¥600</span></div>
+      <div class="payment-row"><span>May 24 — Goshuuin stamps: Hongu, Hayatama, Nachi Taisha, Seiganto-ji</span><span class="yen">¥2,300–¥2,500</span></div>
+      <div class="payment-row"><span>May 24 — Kamenoi Hotel: Onsen Tax (¥300) + Takkyubin 2 bags to Osaka (¥5,020)</span><span class="yen">¥5,320</span></div>
+      <div class="payment-row"><span>May 21–24 misc — vending, trail snacks, Michi-no-Eki lunch, teahouse coffee</span><span class="yen">¥2,000–¥3,000</span></div>
+      <div class="payment-total"><span>Subtotal</span><span class="yen">¥16,520–¥18,300</span></div>
+      <div class="payment-buffer"><span>✓ Buffer remaining from ¥20,000</span><span class="yen">¥1,700–¥3,480</span></div>
+    </div>
+
+    <div class="callout-info" style="margin-top: 12px;"><strong>Backup:</strong> If the Haneda Seven Bank has a long queue (7:25 PM arrival can be busy), use the <strong>Seven Bank at SHM Airport</strong> on May 20 or the <strong>Seven Bank at Kii-Tanabe Station</strong> on May 21 morning as a top-up. Do not board the Ryujin Bus without the full ¥20,000 in hand.</div>
+  </div>
+
+  <!-- Withdrawal 2 -->
+  <div class="card atm">
+    <div class="card-header">
+      <div class="card-title">Withdrawal 2 &mdash; Kii-Katsuura ATM<small>Sunday May 24 PM or Monday May 25 AM &bull; Post-trek resupply</small></div>
+      <span class="badge badge-atm">STOP 2</span>
+    </div>
+
+    <div class="sub-heading">How to Withdraw</div>
+    <ul class="step-list">
+      <li><span class="step-num">1</span><span>Arrive Kii-Katsuura Station ~3:10 PM on May 24. Check for a 7-Eleven nearby, or ask Kamenoi Hotel front desk for the nearest ATM.</span></li>
+      <li><span class="step-num">2</span><span><strong>Matthew withdraws ¥4,000</strong> using his Revolut card</span></li>
+      <li><span class="step-num">3</span><span><strong>Mary withdraws ¥4,000</strong> using her Revolut card</span></li>
+    </ul>
+
+    <div class="payment-box">
+      <span class="payment-title">What ¥8,000 Total Covers (May 25–26)</span>
+      <div class="payment-row"><span>May 25 — Manseiro Ryokan: Onsen Tax (¥150 &times; 2) at check-in</span><span class="yen">¥300</span></div>
+      <div class="payment-row"><span>May 25 — Dual Pilgrim Certificate, Visitor Center near Kii-Katsuura Station</span><span class="yen">¥1,000</span></div>
+      <div class="payment-row"><span>May 26 — Ekiben (Kumano Wagyu bento), Kii-Katsuura Station before 11:49 AM</span><span class="yen">¥2,000–¥3,000</span></div>
+      <div class="payment-row"><span>May 25–26 misc — tuna market, harbor snacks, vending machines</span><span class="yen">¥2,000–¥3,000</span></div>
+      <div class="payment-total"><span>Subtotal</span><span class="yen">¥5,300–¥7,300</span></div>
+      <div class="payment-buffer"><span>✓ Buffer remaining from ¥8,000</span><span class="yen">¥700–¥2,700</span></div>
+    </div>
+  </div>
+
+  <!-- No Withdrawal Osaka -->
+  <div class="card no-bus">
+    <div class="card-header">
+      <div class="card-title">No Withdrawal &mdash; Osaka (May 26–28)<small>Tennoji / Hotel Trusty Osaka Abeno &bull; Fully card-friendly</small></div>
+      <span class="badge" style="background:#c8e8c8; color:#1a4a1a;">CARD ONLY</span>
+    </div>
+    <div class="details">
+      <p>Osaka is one of the most card-accepting cities in Japan. Use <strong>Chase VISA or Apple Pay</strong> for everything. 7-Eleven ATMs are available on every block if emergency cash is ever needed — but it shouldn&rsquo;t be.</p>
+    </div>
+  </div>
+
+  <!-- ATM Action Plan Summary -->
+  <div class="card atm">
+    <div class="card-header">
+      <div class="card-title">ATM Withdrawal Schedule — Action Plan</div>
+      <span class="badge badge-atm">PLAN</span>
+    </div>
+    <div class="atm-box">
+      <span class="atm-box-title">Two Withdrawals — Full Trip</span>
+      <div class="atm-stop">
+        <div class="atm-stop-num">1</div>
+        <div class="atm-stop-body">
+          <div class="atm-stop-title">Haneda T3 — Arrivals Lobby, 2F &bull; Seven Bank (orange)</div>
+          <div class="atm-stop-loc">Tuesday, May 19 &bull; After clearing customs &bull; Before hotel shuttle</div>
+          <div class="atm-person">
+            <span class="atm-amount-pill">¥10,000</span>
+            <span class="atm-person-name">Matthew — Revolut card</span>
+          </div>
+          <div class="atm-person">
+            <span class="atm-amount-pill">¥10,000</span>
+            <span class="atm-person-name">Mary — Revolut card</span>
+          </div>
+          <div class="atm-note">Covers all trek cash obligations: May 21–24 (no ATMs in Kumano Kodo region)</div>
+        </div>
+      </div>
+      <div class="atm-stop">
+        <div class="atm-stop-num">2</div>
+        <div class="atm-stop-body">
+          <div class="atm-stop-title">Kii-Katsuura — 7-Eleven or Kamenoi Hotel area</div>
+          <div class="atm-stop-loc">Sunday May 24 PM or Monday May 25 AM</div>
+          <div class="atm-person">
+            <span class="atm-amount-pill">¥4,000</span>
+            <span class="atm-person-name">Matthew — Revolut card</span>
+          </div>
+          <div class="atm-person">
+            <span class="atm-amount-pill">¥4,000</span>
+            <span class="atm-person-name">Mary — Revolut card</span>
+          </div>
+          <div class="atm-note">Covers post-trek obligations: Manseiro, Dual Pilgrim Cert, Ekiben, misc (May 25–26)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grand-box">
+      <span class="grand-label">Total Cash for the Trip — Both Cards Combined</span>
+      <div class="grand-row"><span>Stop 1 — Haneda T3 (Matthew + Mary)</span><span class="yen">¥20,000</span></div>
+      <div class="grand-row"><span>Stop 2 — Kii-Katsuura (Matthew + Mary)</span><span class="yen">¥8,000</span></div>
+      <div class="grand-final">
+        <span>Total Withdrawn</span>
+        <span class="yen">¥28,000 &nbsp;<span style="font-size:0.72em; font-weight:400; opacity:0.75;">≈ $187 USD at ¥150/USD</span></span>
+      </div>
+    </div>
+    <div class="callout-tip" style="margin-top: 12px;">Each person uses their own Revolut card — two separate transactions at the same machine. If one card has an issue, the other completes the withdrawal.</div>
+  </div>
+
+  <!-- ════ PAYMENT DECISION TREE ════ -->
+  <div class="section-divider">Payment Decision Tree</div>
+  <div class="card neutral">
+    <div class="card-header">
+      <div class="card-title">What to Use &mdash; Quick Reference</div>
+    </div>
+<pre class="decision-tree">Making a payment?
+    │
+    ├─ Train / subway?
+    │       └─ Use Suica (Apple Wallet)
+    │
+    ├─ City bus (Tokyo, Osaka, Kyoto)?
+    │       └─ Use Suica (most accept IC cards)
+    │
+    ├─ Rural / local bus?
+    │       ├─ IC card sign visible? → Use Suica
+    │       └─ No IC sign / distance-based? → Cash + coins
+    │
+    ├─ Convenience store?
+    │       └─ Use Suica or Chase Apple Pay
+    │
+    ├─ Restaurant / izakaya / small shop?
+    │       ├─ Has card reader? → Chase VISA (physical or Apple Pay)
+    │       └─ Cash only?      → Revolut ATM cash
+    │
+    ├─ Temple / shrine / market?
+    │       └─ Cash (almost always)
+    │
+    └─ Need to reload cash?
+            └─ 7-Eleven ATM → Revolut card</pre>
+  </div>
+
+  <!-- ════ PRE-DEPARTURE CHECKLIST ════ -->
+  <div class="section-divider">Pre-Departure Checklist</div>
+  <div class="card checklist">
+    <div class="card-header">
+      <div class="card-title">Complete Before Leaving Home</div>
+      <span class="badge badge-checklist">CHECKLIST</span>
+    </div>
+    <ul class="check-list">
+      <li><input type="checkbox"> <span>Load <strong>$200 USD on each Revolut card</strong> ($400 combined, ~¥60,000 available)</span></li>
+      <li><input type="checkbox"> <span>Enable JPY on Revolut; confirm international ATM use is on; note your PIN</span></li>
+      <li><input type="checkbox"> <span>Add Chase VISA to Apple Wallet; test Apple Pay contactless payment</span></li>
+      <li><input type="checkbox"> <span>Set up Mobile Suica in Apple Wallet; try Revolut top-up first — if rejected, use Chase VISA or station kiosk</span></li>
+      <li><input type="checkbox"> <span>Notify Chase of travel dates (May 19–28)</span></li>
+      <li><input type="checkbox"> <span>Download Google Maps offline for Japan (Kinki + Wakayama regions)</span></li>
+      <li><input type="checkbox"> <span>Save 7-Eleven ATM locator — Google Maps "7-Eleven Japan" or konbini map app</span></li>
+    </ul>
+  </div>
+
+  <!-- ════ FOOTER ════ -->
+  <div class="doc-footer">
+    Cash Plan &mdash; Japan &bull; May 2026 &bull; Matthew Wong &amp; Mary Siu &bull; Kumano Travel Res #186433
+  </div>
+
+</div>
+</body>
+</html>
